@@ -1,17 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,maven,visualstudiocode,executable
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,visualstudiocode,executable
-
-### Executable ###
-*.app
-*.bat
-*.cgi
-*.com
-*.exe
-*.gadget
-*.jar
-*.pif
-*.vb
-*.wsf
+# Created by https://www.toptal.com/developers/gitignore/api/java,maven,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,visualstudiocode
 
 ### Java ###
 # Compiled class file
@@ -27,6 +15,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
 *.war
 *.nar
 *.ear
@@ -82,4 +71,13 @@ buildNumber.properties
 # Ignore code-workspaces
 *.code-workspace
 
-# End of https://www.toptal.com/developers/gitignore/api/java,maven,visualstudiocode,executable
+# End of https://www.toptal.com/developers/gitignore/api/java,maven,visualstudiocode
+
+#Ignore the driver
+*.exe
+
+#Ignore hibernate.cfl.xml
+*.hibernate.cfg.xml
+
+#Ignore .json
+*.json
