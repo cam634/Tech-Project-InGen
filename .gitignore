@@ -73,5 +73,8 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,visualstudiocode
 
-#Driver
+#Ignore the driver
 *.exe
+
+#Ignore hibernate.cfl.xml
+*.hibernate.cfg.xml
