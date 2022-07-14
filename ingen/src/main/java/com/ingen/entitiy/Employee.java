@@ -6,14 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 
-
 @Entity
-@Table(name = "employee")
+@Table(name = "EMPLOYEE")
 public class Employee {
 
     @Id
     @GeneratedValue
-    private int employee_id;
+    @Column(name = "EMPLOYEE_ID")
+    private int employeeId;
     @Column(unique = true)
     private String username;
     private String password;
@@ -21,9 +21,6 @@ public class Employee {
     private String fname;
     private String lname;
     
-  
-
-
     public Employee() {
     }
 
@@ -35,8 +32,8 @@ public class Employee {
         this.lname = lname;
     }
 
-    public Employee(int employee_id, String username, String password, String role, String fname, String lname) {
-        this.employee_id = employee_id;
+    public Employee(int employeeId, String username, String password, String role, String fname, String lname) {
+        this.employeeId = employeeId;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -45,29 +42,24 @@ public class Employee {
     }
 
     public int getId() {
-        return employee_id;
+        return employeeId;
     }
 
-    public void setId(int employee_id) {
-        this.employee_id = employee_id;
+    public void setId(int employeeId) {
+        this.employeeId = employeeId;
     }
-
 
     public String getUsername() {
         return username;
     }
 
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-
     public String getPassword() {
         return password;
     }
-
-
 
     public void setPassword(String password) {
         this.password = password;
@@ -98,13 +90,7 @@ public class Employee {
 
     @Override
     public String toString(){
-        return "Employee [employee_id=" + employee_id + ", username=" + username + ", password=" + password + ", role=" + role + ", fname=" + fname + ", lname=" + lname + "]";
+        return "Employee [employeeId=" + employeeId + ", username=" + username + ", password=" + password + ", role=" + role + ", fname=" + fname + ", lname=" + lname + "]";
     }
-    
-
-
-
-
-
 
 }
