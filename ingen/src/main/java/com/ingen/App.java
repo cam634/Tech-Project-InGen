@@ -1,7 +1,7 @@
 package com.ingen;
 
-import com.ingen.dao.requestdao;
 import com.ingen.entitiy.Employee;
+import com.ingen.repository.EmployeeDao;
 
 /**
  * Hello world!
@@ -11,11 +11,12 @@ public class App
 {
     public static void main( String[] args )
     {
-       Employee user = new Employee("admin","admin","Manager","admin","admin");
+       Employee user = new Employee("new","admin","employee","admin","admin");
 
-       requestdao dao = new requestdao();
+       EmployeeDao dao = new EmployeeDao();
 
-       dao.insert(user);
+        dao.insertEmployee(user);
+       System.out.println(dao.getAllEmployees());
 
     }
 }
