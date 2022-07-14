@@ -30,3 +30,51 @@ For our project the technologies being utilized are Java, Selenium, cucumber, Ja
 7/25/2022-7/28/2022: API Should be finished; E2E should be finished; Any final debugging should be finished by the end of the day 7/28 or 7/27; Code freeze should be implemented 7/28 ideally; Documentation needs to be prepared.  
 
 7/29/2022: We present our project.  
+
+
+User Stories: 
+
+--------Sign in--------
+
+As a user I want to be able to be able create an employee
+    Unit Test
+        enter username , password, role, fname, and lname to the data base.
+            insertEmployee()
+    Service Test
+        Only want unique entries in the database
+            method: checkUsername()
+As a user I want to be able to update a employee if i make a mistake
+    Unit test
+        Update any fields if their is a mistake made 
+            method: updateEmployee()
+    Service Tetst 
+        N/A
+As a user I want to be able to delete a user if we do not  need them in the data base
+    Unit test 
+        Delete a user completely if they leave the company
+
+    Service Test
+        N/A
+--------Employee--------
+As a Employee I want to be able to be able to create a reimbursment request(Will be in pending table)
+    Unit Test 
+        Create reimbursment request with all fields 
+            Method: CreateReimbursmentRequest()
+    Service Test
+        Employees must only be able to request up to $1000 on the request
+            Method:requestUnderThousand()
+        Employees must provide a reason for the reimbursement request no longer than 500 characters
+            Method: requestUnderCharLimit()
+As an Employee I want to be able to see if my request is pending, accepted or denied
+    Unit Test
+       View all pending request
+            Method: viewPendingRequest()
+        View all Aceepted or rejected request
+            Method: viewDecidedRequest()
+    Service Test
+        Employees must only see their own reimbursement requests
+        Method: getRequestbyPerson()
+
+
+    
+

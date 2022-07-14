@@ -1,16 +1,20 @@
 package com.ingen.entitiy;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 
 
 @Entity
+@Table(name = "employee")
 public class Employee {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int employee_id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String role;
@@ -31,12 +35,21 @@ public class Employee {
         this.lname = lname;
     }
 
-    public int getId() {
-        return id;
+    public Employee(int employee_id, String username, String password, String role, String fname, String lname) {
+        this.employee_id = employee_id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.fname = fname;
+        this.lname = lname;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return employee_id;
+    }
+
+    public void setId(int employee_id) {
+        this.employee_id = employee_id;
     }
 
 
@@ -81,6 +94,11 @@ public class Employee {
     }
     public void setLname(String lname) {
         this.lname = lname;
+    }
+
+    @Override
+    public String toString(){
+        return "Employee [employee_id=" + employee_id + ", username=" + username + ", password=" + password + ", role=" + role + ", fname=" + fname + ", lname=" + lname + "]";
     }
     
 
