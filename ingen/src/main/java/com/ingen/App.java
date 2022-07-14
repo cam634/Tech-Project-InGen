@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-       Employee user = new Employee("new","admin","employee","admin","admin");
+       Employee user = new Employee("new15","admin","employee","admin","admin");
 
        EmployeeDao dao = new EmployeeDao();
 
