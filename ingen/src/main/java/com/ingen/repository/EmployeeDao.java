@@ -15,10 +15,19 @@ public class EmployeeDao implements EmployeedaoInterface{
 
 @Override
    public Employee insertEmployee(Employee newEmployee){
-    HibernateUtil.beginTransaction();
-    HibernateUtil.getSession().save(newEmployee);
-    HibernateUtil.endTransaction();
-    return newEmployee;
+    
+    try{ 
+        HibernateUtil.beginTransaction();
+        HibernateUtil.getSession().save(newEmployee);
+        HibernateUtil.endTransaction();
+        return newEmployee ;
+    }catch(Exception e){
+        HibernateUtil.beginTransaction();
+        HibernateUtil.endTransaction();
+        return null;
+
+    }
+
    }
 
    @Override

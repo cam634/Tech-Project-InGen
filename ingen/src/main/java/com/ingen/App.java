@@ -13,9 +13,11 @@ public class App
 {
     public static void main( String[] args )
     {
+
     Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
     RequestDao Dao = new RequestDao();
     Dao.createRequest(newRequest);
     System.out.println(Dao.getallRequest());
+
     }
 }

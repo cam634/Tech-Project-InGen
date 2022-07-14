@@ -16,7 +16,9 @@ public class Request {
     private int requestId;
     private String status;
     private int value;
+    @Column(length = 500)
     private String requestReason;
+    @Column(length = 500)
     private String reviewReason;
     private String requestedBy;
     private String reviewedBy;
