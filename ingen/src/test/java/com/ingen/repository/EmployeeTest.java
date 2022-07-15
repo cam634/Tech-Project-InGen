@@ -19,16 +19,11 @@ public class EmployeeTest {
     public static void setup(){
         EmployeeDao = new EmployeeDao();
 
-        Employee setNewEmployee = new Employee("Manager39","admin","employee","admin","admin");
+        Employee setNewEmployee = new Employee("Manager32678","admin","employee","admin","admin");
 
         EmployeeDao.insertEmployee(setNewEmployee);
     }
-    @Test
-    public void createEmployeePostiveTest(){
-        Employee setNewEmployee = new Employee("admin34","admin","employee","admin","admin");
-        Employee result = EmployeeDao.insertEmployee(setNewEmployee);
-       Assert.assertNotNull(result.getId());
-    }
+   
 
     @Test
     public void neagitivetestCreatesameUsername(){
