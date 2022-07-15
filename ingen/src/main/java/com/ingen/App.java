@@ -13,7 +13,9 @@ public class App
 {
     public static void main( String[] args )
     {
-
+    Employee employee = new Employee("Test","Test","Test","Test","Test");
+    EmployeeDao dao = new EmployeeDao();
+    dao.insertEmployee(employee);
     Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
     RequestDao Dao = new RequestDao();
     Dao.createRequest(newRequest);
