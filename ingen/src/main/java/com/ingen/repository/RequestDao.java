@@ -13,8 +13,7 @@ import com.ingen.repository.RequestDao;
 
 public class RequestDao implements RequestdaoInterface{
 
-
-@Override
+   @Override
    public Request createRequest(Request newIdRequest){
     HibernateUtil.beginTransaction();
     HibernateUtil.getSession().save(newIdRequest);
@@ -22,15 +21,22 @@ public class RequestDao implements RequestdaoInterface{
     return newIdRequest;
    }
 
- 
-@Override
+   @Override
    public List<Request> getallRequest(){
     HibernateUtil.beginTransaction();
     List<Request> RequestList = HibernateUtil.getSession().createQuery("from Request", Request.class).getResultList();
     HibernateUtil.endTransaction();
     return RequestList;
    }
-   
+
+   @Override
+   public Request updateRequest(Request updatedRequest) {
+       HibernateUtil.beginTransaction();
+       HibernateUtil.getSession().update(updatedRequest);
+       HibernateUtil.endTransaction();
+       return updatedRequest;
+   }
+ 
 }
 
    

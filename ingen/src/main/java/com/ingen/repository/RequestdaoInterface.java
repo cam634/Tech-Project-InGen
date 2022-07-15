@@ -9,6 +9,7 @@ Request createRequest(Request newIdRequest);
 
 List<Request> getallRequest();
 
+Request updateRequest(Request updatedRequest);
 
 
 }
