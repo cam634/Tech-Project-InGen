@@ -1,12 +1,15 @@
 package com.ingen.service;
 
+import java.util.List;
+
 import com.ingen.entitiy.Employee;
-import com.ingen.repository.EmployeedaoInterface;
 
 
 public interface EmployeeServiceInterface {
     
     Employee serviceCreateEmployee(Employee employee);
+
+    List<Employee> servicegetAllEmployees();
 
 
 
