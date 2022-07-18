@@ -25,9 +25,15 @@ public class Main {
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
         EmployeeController employeeController = new EmployeeController(employeeService);
 
-        app.get("/hello", employeeController.getHelloWorld);
 
         app.get("/employee", employeeController.getAllEmployees);
+
+        app.delete("/employee", employeeController.deleteEmployee);
+
+        app.post("/employee", employeeController.createEmployee);
+
+        app.put("/employee", employeeController.updateEmployee);
+
         
     }
     

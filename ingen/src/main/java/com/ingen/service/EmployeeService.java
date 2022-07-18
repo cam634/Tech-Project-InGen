@@ -21,5 +21,15 @@ public class EmployeeService implements EmployeeServiceInterface {
     public List<Employee> servicegetAllEmployees() {
         return employeeDao.getAllEmployees();
     }
+
+    @Override   
+    public Employee serviceUpadteEmployee(Employee updatedemployee) {
+        return employeeDao.updateEmployee(updatedemployee);
+    }
+
+    @Override
+    public boolean serviceDeleteEmployee(Employee employeeToBeDeled){
+        return employeeDao.deleteEmployee(employeeToBeDeled);
+    }
     
 }

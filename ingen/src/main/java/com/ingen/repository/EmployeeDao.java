@@ -32,10 +32,9 @@ public class EmployeeDao implements EmployeedaoInterface{
     return employeelist;
    }
    @Override
-   public boolean deleteEmployee(int id){
+   public boolean deleteEmployee(Employee employeeToBeDeleted){
     HibernateUtil.beginTransaction();
-    Employee employee = HibernateUtil.getSession().get(Employee.class, id);
-    HibernateUtil.getSession().delete(employee);
+    HibernateUtil.getSession().delete(employeeToBeDeleted);
     HibernateUtil.endTransaction();
     return true;
    }
