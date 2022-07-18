@@ -2,9 +2,7 @@ package com.ingen.repository;
 
 
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.ingen.entitiy.Employee;
 
@@ -25,15 +23,7 @@ public class EmployeeTest {
     }
    
 
-    @Test
-    public void neagitivetestCreatesameUsername(){
-        try {
-            Employee setNewEmployee = new Employee("admin","admin","employee","admin","admin");
-            EmployeeDao.insertEmployee(setNewEmployee);
-        }catch(javax.persistence.PersistenceException e){
-            System.out.println(e.getMessage());
-    }
-}
+  
 
 }
 
