@@ -50,5 +50,14 @@ public class RequestTest {
         RequestDao.createRequest(newRequest);
         boolean result = RequestDao.deleteRequest(newRequest.getId());
         Assert.assertTrue(result);
+    
+    @Test
+    public void updateRequestPositiveTest(){
+        RequestDao = new RequestDao();
+        Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
+        RequestDao.createRequest(newRequest);
+        Request updatedRequest = new Request(78,"approved", 100, "NA", "Check", "username", "employee");
+        RequestDao.updateRequest(updatedRequest);
+        Assert.assertEquals(updatedRequest.getStatus(), "approved");
     }
 }

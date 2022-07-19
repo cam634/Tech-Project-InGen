@@ -19,15 +19,23 @@ public class Main {
             config.enableCorsForAllOrigins();
             config.enableDevLogging();
 
-        }).start();
+        }).start(4040);
 
         EmployeedaoInterface employeeDao = new EmployeeDao();
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
         EmployeeController employeeController = new EmployeeController(employeeService);
 
-        app.get("/hello", employeeController.getHelloWorld);
 
         app.get("/employee", employeeController.getAllEmployees);
+
+        app.delete("/employee", employeeController.deleteEmployee);
+
+        app.post("/employee", employeeController.createEmployee);
+
+        app.put("/employee", employeeController.updateEmployee);
+
+        app.patch("/employee", employeeController.loginEmployee);
+
         
     }
     

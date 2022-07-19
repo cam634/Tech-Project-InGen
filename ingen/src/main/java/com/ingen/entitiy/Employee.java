@@ -41,6 +41,11 @@ public class Employee {
         this.lname = lname;
     }
 
+    public Employee(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public int getId() {
         return employeeId;
     }

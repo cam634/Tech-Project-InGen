@@ -12,9 +12,11 @@ public interface EmployeedaoInterface {
 
     List<Employee> getAllEmployees();
 
-    boolean deleteEmployee(int id);
+    boolean deleteEmployee(Employee employeeToBeDeleted);
 
     Employee updateEmployee(Employee updatedEmployee);
+
+    Employee loginEmployee(Employee employeeToBeLoggedIn);
 
 
 

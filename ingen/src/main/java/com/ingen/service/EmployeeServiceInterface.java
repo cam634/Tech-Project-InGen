@@ -11,6 +11,10 @@ public interface EmployeeServiceInterface {
 
     List<Employee> servicegetAllEmployees();
 
+    Employee serviceUpadteEmployee(Employee updatedemployee);
 
+    boolean serviceDeleteEmployee(Employee employeeToBeDeled);
+
+    Employee serviceLoginEmployee(Employee employeeToBeLoggedIn);
 
 }
