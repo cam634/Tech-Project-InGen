@@ -19,7 +19,7 @@ public class App
     Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
     RequestDao Dao = new RequestDao();
     Dao.createRequest(newRequest);
-    System.out.println(Dao.getallRequest());
+    System.out.println(Dao.getAllRequests());
 
     EmployeeServiceInterface employeeService = new EmployeeService(new EmployeeDao());
     System.out.println(employeeService.servicegetAllEmployees());
