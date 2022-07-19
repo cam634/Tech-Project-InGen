@@ -3,7 +3,7 @@ package com.ingen;
 
 import com.ingen.controllers.EmployeeController;
 import com.ingen.repository.EmployeeDao;
-import com.ingen.repository.EmployeedaoInterface;
+import com.ingen.repository.EmployeeDaoInterface;
 import com.ingen.service.EmployeeService;
 import com.ingen.service.EmployeeServiceInterface;
 
@@ -21,7 +21,7 @@ public class Main {
 
         }).start(4040);
 
-        EmployeedaoInterface employeeDao = new EmployeeDao();
+        EmployeeDaoInterface employeeDao = new EmployeeDao();
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
         EmployeeController employeeController = new EmployeeController(employeeService);
 
