@@ -11,32 +11,48 @@ import com.ingen.repository.RequestDao;
 
 
 
-public class RequestDao implements RequestdaoInterface{
+public class RequestDao implements RequestDaoInterface{
 
-   @Override
-   public Request createRequest(Request newIdRequest){
-    HibernateUtil.beginTransaction();
-    HibernateUtil.getSession().save(newIdRequest);
-    HibernateUtil.endTransaction();
-    return newIdRequest;
-   }
+    @Override
+    public Request createRequest(Request newIdRequest){
+        HibernateUtil.beginTransaction();
+        HibernateUtil.getSession().save(newIdRequest);
+        HibernateUtil.endTransaction();
+        return newIdRequest;
+    }
 
-   @Override
-   public List<Request> getallRequest(){
-    HibernateUtil.beginTransaction();
-    List<Request> RequestList = HibernateUtil.getSession().createQuery("from Request", Request.class).getResultList();
-    HibernateUtil.endTransaction();
-    return RequestList;
-   }
+    @Override
+    public Request getRequestById(int id){
+        HibernateUtil.beginTransaction();
+        Request request = HibernateUtil.getSession().get(Request.class, id);
+        HibernateUtil.endTransaction();
+        return request;
+    }
 
-   @Override
-   public Request updateRequest(Request updatedRequest) {
-       HibernateUtil.beginTransaction();
-       HibernateUtil.getSession().update(updatedRequest);
-       HibernateUtil.endTransaction();
-       return updatedRequest;
-   }
- 
+    @Override
+    public List<Request> getAllRequests(){
+        HibernateUtil.beginTransaction();
+        List<Request> RequestList = HibernateUtil.getSession().createQuery("from Request", Request.class).getResultList();
+        HibernateUtil.endTransaction();
+        return RequestList;
+    }
+
+    @Override
+    public Request updateRequest(Request updatedRequest) {
+        HibernateUtil.beginTransaction();
+        HibernateUtil.getSession().update(updatedRequest);
+        HibernateUtil.endTransaction();
+        return updatedRequest;
+    }
+
+    @Override
+    public boolean deleteRequest(int id){
+        HibernateUtil.beginTransaction();
+        Request request = HibernateUtil.getSession().get(Request.class, id);
+        HibernateUtil.getSession().delete(request);
+        HibernateUtil.endTransaction();
+        return true;
+    }
 }
 
    

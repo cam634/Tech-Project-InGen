@@ -1,15 +1,18 @@
 package com.ingen.repository;
 
 import java.util.List;
-
 import com.ingen.entitiy.Request;
-public interface RequestdaoInterface {
 
-Request createRequest(Request newIdRequest);
+public interface RequestDaoInterface {
 
-List<Request> getallRequest();
+    Request createRequest(Request newIdRequest);
 
-Request updateRequest(Request updatedRequest);
+    Request getRequestById(int id);
 
+    List<Request> getAllRequests();
+
+    Request updateRequest(Request updatedRequest);
+
+    boolean deleteRequest(int id);
 
 }
