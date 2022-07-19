@@ -16,6 +16,8 @@ public interface EmployeedaoInterface {
 
     Employee updateEmployee(Employee updatedEmployee);
 
+    Employee loginEmployee(Employee employeeToBeLoggedIn);
+
 
 
 

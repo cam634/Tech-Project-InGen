@@ -46,6 +46,20 @@ public class EmployeeDao implements EmployeedaoInterface{
      return updatedEmployee;
     }
 
+
+    @Override
+    public Employee loginEmployee(Employee employeeToBeLoggedIn){
+        HibernateUtil.beginTransaction();
+        Employee employee = (Employee) HibernateUtil.getSession().createQuery("from Employee where username = :username and password = :password", Employee.class).setParameter("username", employeeToBeLoggedIn.getUsername()).setParameter("password", employeeToBeLoggedIn.getPassword()).uniqueResult();
+        if(employee != null){
+            HibernateUtil.endTransaction();
+            return employee;
+        }else{
+               HibernateUtil.endTransaction();
+               return null;
+        }
+    }
+
    
 
 

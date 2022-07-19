@@ -19,7 +19,7 @@ public class Main {
             config.enableCorsForAllOrigins();
             config.enableDevLogging();
 
-        }).start();
+        }).start(4040);
 
         EmployeedaoInterface employeeDao = new EmployeeDao();
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
@@ -33,6 +33,8 @@ public class Main {
         app.post("/employee", employeeController.createEmployee);
 
         app.put("/employee", employeeController.updateEmployee);
+
+        app.patch("/employee", employeeController.loginEmployee);
 
         
     }

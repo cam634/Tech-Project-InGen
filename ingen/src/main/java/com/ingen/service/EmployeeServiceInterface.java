@@ -15,4 +15,6 @@ public interface EmployeeServiceInterface {
 
     boolean serviceDeleteEmployee(Employee employeeToBeDeled);
 
+    Employee serviceLoginEmployee(Employee employeeToBeLoggedIn);
+
 }

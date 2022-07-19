@@ -52,7 +52,7 @@ public class EmployeeController {
             String resultJson = this.gson.toJson(message);
 
             ctx.result(resultJson);
-            ctx.status(200);
+            ctx.status(400);
         }
 
     };
@@ -71,7 +71,7 @@ public class EmployeeController {
         message.put("message", e.getMessage());
         String messageJson = this.gson.toJson(message);
         ctx.result(messageJson);
-        ctx.status(201);
+        ctx.status(400);
     }
     };
 
@@ -91,6 +91,29 @@ public class EmployeeController {
               ctx.status(400);
         
     };
+};
+
+
+public Handler loginEmployee = ctx -> {
+
+    try{
+        String json = ctx.body();
+        Employee employeeToUpdate = this.gson.fromJson(json, Employee.class);
+        Employee updatedEmployee = this.employeeService.serviceLoginEmployee(employeeToUpdate);
+        String resultJson = this.gson.toJson(updatedEmployee);
+        ctx.result(resultJson);
+        ctx.status(200);}
+        catch(Exception e){
+              Map<String, String> message = new HashMap<>();
+              message.put("message", e.getMessage());
+              String messageJson = this.gson.toJson(message);
+              ctx.result(messageJson);
+              ctx.status(400);
+        
+    };
+
+
+
 };
 
 }
