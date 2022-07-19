@@ -20,7 +20,7 @@ public class RequestService implements RequestServiceInterface{
 
     @Override
     public Request serviceCreateRequest(Request request){
-        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request)){
+        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request) && this.businessRules.checkReviewReasonLength(request)){
             return this.requestDao.createRequest(request);
         } else {
             throw new InvalidRequest("Invalid request: please try again");
@@ -47,7 +47,7 @@ public class RequestService implements RequestServiceInterface{
 
     @Override
     public Request serviceUpdateRequest(Request request){
-        if (this.businessRules.checkReviewReasonLength(request)){
+        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request) && this.businessRules.checkReviewReasonLength(request)){
             return this.requestDao.updateRequest(request);
         } else {
             throw new InvalidRequest("Invalid request: please try again");

@@ -50,6 +50,7 @@ public class RequestTest {
         RequestDao.createRequest(newRequest);
         boolean result = RequestDao.deleteRequest(newRequest.getId());
         Assert.assertTrue(result);
+    }
     
     @Test
     public void updateRequestPositiveTest(){
