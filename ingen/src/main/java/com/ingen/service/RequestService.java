@@ -1,71 +1,100 @@
 package com.ingen.service;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.ingen.entitiy.Request;
-import com.ingen.repository.RequestdaoInterface;
+import com.ingen.exceptions.InvalidRequest;
+import com.ingen.repository.RequestDaoInterface;
+import com.ingen.Utils.RequestBusinessRules;;
 
 public class RequestService implements RequestServiceInterface{
-    private RequestdaoInterface requestDao;
-    public RequestService(RequestServiceInterface requestService){
+
+    private RequestDaoInterface requestDao;
+    private RequestBusinessRules businessRules;
+
+    public RequestService(RequestDaoInterface requestDao, RequestBusinessRules businessRules){
         this.requestDao = requestDao;
-    }
-
-    @Override
-    public Boolean checkRequestReasonLength(Request RequestToCheck){
-        if(RequestToCheck.getRequestReason().length() <= 500){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean checkValue(Request request){
-        if (request.getValue() <= 1000){
-            return true;
-        } else {
-            return false;
-        }
+        this.businessRules = businessRules;
     }
 
     @Override
     public Request serviceCreateRequest(Request request){
-        if (checkValue(request) && checkRequestReasonLength(request)){
+        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request) && this.businessRules.checkReviewReasonLength(request)){
             return this.requestDao.createRequest(request);
         } else {
-            return null;
+            throw new InvalidRequest("Invalid request: please try again");
         }
     }
 
     @Override
-    public List<Request> viewAuthorizedRequests(List<Request> requestList, String username){
-        List<Request> newRequestList = new ArrayList<Request>();
-        for (Request request : requestList){
-            if (request.getRequestedBy().equals(username)){
-                newRequestList.add(request);	
-            }	
-        }
-        return newRequestList;
+    public Request serviceGetRequestById(int id){
+        return this.requestDao.getRequestById(id);
     }
 
     @Override
-    public boolean checkReviewReasonLength (Request requestToCheck){
-        if (requestToCheck.getReviewReason().length() <= 500){
-            return true;
-        } else {
-            return false;
-        }
+    //returns list of requests made by a specific user
+    public List<Request> serviceGetSelfRequests(String username){
+        List<Request> requestList= this.requestDao.getAllRequests();
+        return this.businessRules.getSelfRequests(requestList, username);
+    }
+
+    @Override
+    //returns list of all requests
+    public List<Request> serviceGetAllRequests(){
+        return this.requestDao.getAllRequests();
     }
 
     @Override
     public Request serviceUpdateRequest(Request request){
-        if (checkReviewReasonLength(request)){
+        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request) && this.businessRules.checkReviewReasonLength(request)){
             return this.requestDao.updateRequest(request);
         } else {
-            return null;
+            throw new InvalidRequest("Invalid request: please try again");
         }
     }
 
+    @Override
+    public boolean serviceDeleteRequest(int id){
+        return this.requestDao.deleteRequest(id);
+    }
+
+    @Override
+    //Returns a list of all Pending requests
+    public List<Request> getPendingRequests(List<Request> requestList){
+        Iterator<Request> itr = requestList.iterator();
+        while (itr.hasNext()) {
+            Request request = itr.next(); 
+            String status = request.getStatus();
+            boolean pending = status.equals("Pending");
+            if (!pending){
+                itr.remove();	
+            }	
+        }
+        return requestList;
+    }
+    
+    @Override
+    //Returns total value of all requests approved by the company
+    public int getApprovalTotal(List<Request> requestList){
+        int total = 0;
+        for (Request request : requestList){
+            if (request.getStatus().equals("Approved")){
+                total += request.getValue();
+            }
+        }
+        return total;
+    }
+    
+    @Override 
+    //Returns total value of all request approved by specific user 
+    public int getSelfApprovalTotal(List<Request> requestList, String username){
+        int total = 0;
+        for (Request request : requestList){
+            if (request.getStatus().equals("Approved") && request.getReviewedBy().equals(username)){
+                total += request.getValue();
+            }
+        }
+        return total;
+    }
 }

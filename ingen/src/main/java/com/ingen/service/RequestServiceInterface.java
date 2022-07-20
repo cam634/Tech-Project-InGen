@@ -5,15 +5,22 @@ import java.util.List;
 import com.ingen.entitiy.Request;
 
 public interface RequestServiceInterface {
-    Boolean checkRequestReasonLength(Request RequestToCheck);
+  
+    Request serviceCreateRequest(Request request);
 
-    public boolean checkValue(Request request);
+    Request serviceGetRequestById(int id);
 
-    public Request serviceCreateRequest(Request request);
+    List<Request> serviceGetSelfRequests(String username);
 
-    public List<Request> viewAuthorizedRequests(List<Request> requestList, String username);
-
-    boolean checkReviewReasonLength (Request requestToCheck);
+    List<Request> serviceGetAllRequests();
 
     Request serviceUpdateRequest(Request request);
+
+    boolean serviceDeleteRequest(int id);
+
+    List<Request> getPendingRequests(List<Request> requestList);
+
+    int getApprovalTotal(List<Request> requestList);
+
+    int getSelfApprovalTotal(List<Request> requestList, String username);
 }

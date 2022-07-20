@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ingen.entitiy.Employee;
 
-public interface EmployeedaoInterface {
+public interface EmployeeDaoInterface {
 
     public Employee insertEmployee(Employee newEmployee);
 
