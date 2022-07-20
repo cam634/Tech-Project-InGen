@@ -17,4 +17,6 @@ public interface EmployeeServiceInterface {
 
     Employee serviceLoginEmployee(Employee employeeToBeLoggedIn);
 
+    Employee serviceUniqueUsername(Employee employeeUsernameToBechecked);
+
 }

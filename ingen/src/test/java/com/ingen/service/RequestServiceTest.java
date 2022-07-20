@@ -1,9 +1,7 @@
 package com.ingen.service;
 
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -16,8 +14,6 @@ import com.ingen.exceptions.InvalidRequest;
 import com.ingen.entitiy.Request;
 import com.ingen.repository.RequestDao;
 import com.ingen.repository.RequestDaoInterface;
-import com.ingen.service.EmployeeServiceInterface;
-import com.ingen.service.EmployeeService;
 
 public class RequestServiceTest {
     public static RequestDaoInterface requestDao;
@@ -120,7 +116,7 @@ public class RequestServiceTest {
             mockService.serviceCreateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 
@@ -133,8 +129,9 @@ public class RequestServiceTest {
             Mockito.when(mockRules.checkValue(badRequest)).thenReturn(false);
             mockService.serviceCreateRequest(badRequest);
             Assert.fail();
-        } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+        } catch (InvalidRequest e) {            
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
+
         }
     }
 
@@ -148,7 +145,7 @@ public class RequestServiceTest {
             mockService.serviceCreateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 
@@ -162,7 +159,7 @@ public class RequestServiceTest {
             mockService.serviceUpdateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 
@@ -176,7 +173,7 @@ public class RequestServiceTest {
             mockService.serviceUpdateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 
@@ -190,7 +187,7 @@ public class RequestServiceTest {
             mockService.serviceUpdateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("invalid request: please try again", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 }

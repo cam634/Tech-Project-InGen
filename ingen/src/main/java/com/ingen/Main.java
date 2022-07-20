@@ -19,7 +19,7 @@ public class Main {
             config.enableCorsForAllOrigins();
             config.enableDevLogging();
 
-        }).start(4040);
+        }).start();
 
         EmployeeDaoInterface employeeDao = new EmployeeDao();
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);

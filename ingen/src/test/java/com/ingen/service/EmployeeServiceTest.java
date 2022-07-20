@@ -5,6 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ingen.entitiy.Employee;
+import com.ingen.exceptions.Invalid;
 import com.ingen.repository.EmployeeDao;
 import com.ingen.repository.EmployeeDaoInterface;
 
@@ -28,20 +29,23 @@ public class EmployeeServiceTest {
     public void neagitivetestCreatesameUsername(){
          ;
         try {
-            Employee setNewEmployee = new Employee("admin24356781232","admin","employee","admin","admin");
-            employeeService.serviceCreateEmployee(setNewEmployee);
-            Employee setduplicateusnernameemployee = new Employee("admin2435678","admin","employee","admin","admin");
-            employeeService.serviceCreateEmployee(setduplicateusnernameemployee);
+            Employee setduplicateusnernameemployee = new Employee("Test","admin","employee","admin","admin");
+            employeeService.serviceUniqueUsername(setduplicateusnernameemployee);
             Assert.fail();
-        }catch(javax.persistence.PersistenceException e){
+        }catch(Invalid e){            
+            Assert.assertEquals("Username already exists", e.getMessage());
+
         }
     }
 
 
     @Test 
     public void postiveTestCreateUniqueUsername(){
-        Employee setNewEmployee = new Employee("4564789","admin","employee","admin","admin");
-        employeeService.serviceCreateEmployee(setNewEmployee);
+        
+            Employee setduplicateusnernameemployee = new Employee("CameronHauser2640","admin","employee","admin","admin");
+            employeeService.serviceUniqueUsername(setduplicateusnernameemployee);
+            Assert.assertEquals("CameronHauser2640", setduplicateusnernameemployee.getUsername());
+     
     }
 }
 
