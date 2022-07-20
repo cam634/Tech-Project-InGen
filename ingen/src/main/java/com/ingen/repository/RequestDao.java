@@ -14,11 +14,11 @@ import com.ingen.repository.RequestDao;
 public class RequestDao implements RequestDaoInterface{
 
     @Override
-    public Request createRequest(Request newIdRequest){
+    public Request createRequest(Request newRequest) {
         HibernateUtil.beginTransaction();
-        HibernateUtil.getSession().save(newIdRequest);
+        HibernateUtil.getSession().save(newRequest);
         HibernateUtil.endTransaction();
-        return newIdRequest;
+        return newRequest;
     }
 
     @Override

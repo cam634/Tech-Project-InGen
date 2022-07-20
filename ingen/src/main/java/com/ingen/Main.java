@@ -42,7 +42,8 @@ public class Main {
         app.patch("/employee", employeeController.loginEmployee);
 
         RequestDao requestDao = new RequestDao();
-        RequestServiceInterface requestService = new RequestService(requestDao);
+        RequestBusinessRules requestBusinessRules = new RequestBusinessRules();
+        RequestServiceInterface requestService = new RequestService(requestDao, requestBusinessRules);
         RequestController requestController = new RequestController(requestService);
         
 
