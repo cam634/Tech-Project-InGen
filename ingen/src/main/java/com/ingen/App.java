@@ -1,6 +1,5 @@
 package com.ingen;
 
-import com.ingen.entitiy.Employee;
 import com.ingen.entitiy.Request;
 import com.ingen.repository.EmployeeDao;
 import com.ingen.repository.RequestDao;

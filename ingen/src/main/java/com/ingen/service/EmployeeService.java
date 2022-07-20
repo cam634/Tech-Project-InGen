@@ -5,6 +5,8 @@ import java.util.List;
 import com.ingen.entitiy.Employee;
 import com.ingen.repository.EmployeeDaoInterface;
 import com.ingen.exceptions.Invalid;
+import com.ingen.exceptions.Invalid;
+
 
 
 public class EmployeeService implements EmployeeServiceInterface {
@@ -44,4 +46,17 @@ public class EmployeeService implements EmployeeServiceInterface {
             throw new Invalid("Invalid username or password");
         }
     };
+
+
+    @Override 
+    public Employee serviceUniqueUsername(Employee employeeUsernameToBechecked){
+        List<Employee> result = employeeDao.getAllEmployees();
+        for(int x = 0; x < result.size(); x++){
+            if(result.get(x).getUsername().equals(employeeUsernameToBechecked.getUsername())){
+                throw new Invalid("Username already exists");
+            }
+        }
+        return employeeUsernameToBechecked;
+        
+    }
 }
