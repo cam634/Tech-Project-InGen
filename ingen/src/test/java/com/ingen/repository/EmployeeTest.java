@@ -11,7 +11,7 @@ import com.ingen.entitiy.Employee;
 
 public class EmployeeTest {
 
-    public static EmployeedaoInterface EmployeeDao;
+    public static EmployeeDaoInterface EmployeeDao;
 
     @BeforeClass
     public static void setup(){

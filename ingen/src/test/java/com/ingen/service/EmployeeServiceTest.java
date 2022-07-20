@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import com.ingen.entitiy.Employee;
 import com.ingen.repository.EmployeeDao;
-import com.ingen.repository.EmployeedaoInterface;
+import com.ingen.repository.EmployeeDaoInterface;
 
 public class EmployeeServiceTest {
 
-    public static EmployeedaoInterface employeedao;
+    public static EmployeeDaoInterface employeedao;
 
     public static EmployeeServiceInterface employeeService;
     
