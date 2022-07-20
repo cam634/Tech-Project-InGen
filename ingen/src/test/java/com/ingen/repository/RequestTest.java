@@ -23,7 +23,7 @@ public class RequestTest {
         RequestDao = new RequestDao();
         Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
         RequestDao.createRequest(newRequest);
-        Assert.assertNotNull(newRequest.getId());
+        Assert.assertNotNull(newRequest);
     }
 
     @Test
@@ -32,25 +32,7 @@ public class RequestTest {
         Assert.assertTrue(RequestList.size() >= 1);
     }
 
-    @Test
-    public void getRequestByIdPositiveTest(){
-        RequestDao = new RequestDao();
-        Request newRequest = new Request( "status", 100, "NA", "Check", "username", "employee");
-        RequestDao.createRequest(newRequest);
-        Request fetchedRequest = RequestDao.getRequestById(newRequest.getId());
-        boolean result = newRequest.getId() == fetchedRequest.getId();
-        RequestDao.deleteRequest(newRequest);
-        Assert.assertTrue(result);
-    }
 
-    @Test
-    public void deleteRequestPositiveTest(){
-        RequestDao = new RequestDao();
-        Request newRequest = new Request("status", 100, "NA", "Check", "username", "employee");
-        RequestDao.createRequest(newRequest);
-        boolean result = RequestDao.deleteRequest(newRequest);
-        Assert.assertTrue(result);
-    }
     
     @Test
     public void updateRequestPositiveTest(){

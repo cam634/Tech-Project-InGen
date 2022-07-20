@@ -45,16 +45,6 @@ public class RequestController {
         ctx.status(200);
     };
 
-    public Handler deleteRequest = ctx -> {
-        String json = ctx.body();
-        Request requestToDelete = this.gson.fromJson(json, Request.class);
-        this.requestService.serviceDeleteRequest(requestToDelete);
-        Map<String, String> message = new HashMap<>();
-        message.put("message", "request was deleted");
-        String messageJson = this.gson.toJson(message);
-        ctx.result(messageJson);
-        ctx.status(203);
-    };
 
     public Handler updateRequest = ctx -> {
         try{

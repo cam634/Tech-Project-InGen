@@ -15,24 +15,14 @@ public class EmployeeService implements EmployeeServiceInterface {
         this.employeeDao = employeedao;
     }
 
-    @Override
-    public Employee serviceCreateEmployee(Employee employee) {
-        return employeeDao.insertEmployee(employee);
-    }
+ 
     @Override 
     public List<Employee> servicegetAllEmployees() {
         return employeeDao.getAllEmployees();
     }
 
-    @Override   
-    public Employee serviceUpadteEmployee(Employee updatedemployee) {
-        return employeeDao.updateEmployee(updatedemployee);
-    }
 
-    @Override
-    public boolean serviceDeleteEmployee(Employee employeeToBeDeled){
-        return employeeDao.deleteEmployee(employeeToBeDeled);
-    }
+
 
     @Override
     public Employee serviceLoginEmployee(Employee employeeToBeLoggedIn){ 
@@ -46,15 +36,5 @@ public class EmployeeService implements EmployeeServiceInterface {
     };
 
 
-    @Override 
-    public Employee serviceUniqueUsername(Employee employeeUsernameToBechecked){
-        List<Employee> result = employeeDao.getAllEmployees();
-        for(int x = 0; x < result.size(); x++){
-            if(result.get(x).getUsername().equals(employeeUsernameToBechecked.getUsername())){
-                throw new Invalid("Username already exists");
-            }
-        }
-        return employeeUsernameToBechecked;
-        
-    }
+    
 }

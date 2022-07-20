@@ -20,10 +20,10 @@ public class EmployeeTest {
     @Test
     public void updateEmployeePostive(){
         EmployeeDao = new EmployeeDao();
-        Employee updatedEmployee = new Employee(88,"ThisisATest","Test","Test","Test","Test");
-        EmployeeDao.updateEmployee(updatedEmployee);
+        Employee updatedEmployee = new Employee("ThisisATest","Test");
+        EmployeeDao.loginEmployee(updatedEmployee);
         
-        Assert.assertTrue(updatedEmployee.getId() == 88);
+        Assert.assertNotNull(updatedEmployee);
     }
     
     

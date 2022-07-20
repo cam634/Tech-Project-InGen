@@ -30,10 +30,7 @@ public class RequestService implements RequestServiceInterface{
         }
     }
 
-    @Override
-    public Request serviceGetRequestById(int id){
-        return this.requestDao.getRequestById(id);
-    }
+
 
     @Override
     //returns list of requests made by a specific user
@@ -57,10 +54,7 @@ public class RequestService implements RequestServiceInterface{
         }
     }
 
-    @Override
-    public boolean serviceDeleteRequest(Request requestToBeDeleted){
-        return this.requestDao.deleteRequest(requestToBeDeleted);
-    }
+
 
     @Override
     //Returns a list of all Pending requests

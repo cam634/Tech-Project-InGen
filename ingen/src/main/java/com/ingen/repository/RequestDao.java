@@ -21,13 +21,7 @@ public class RequestDao implements RequestDaoInterface{
         return newRequest;
     }
 
-    @Override
-    public Request getRequestById(int id){
-        HibernateUtil.beginTransaction();
-        Request request = HibernateUtil.getSession().get(Request.class, id);
-        HibernateUtil.endTransaction();
-        return request;
-    }
+
 
     @Override
     public List<Request> getAllRequests(){
@@ -45,13 +39,6 @@ public class RequestDao implements RequestDaoInterface{
         return updatedRequest;
     }
 
-    @Override
-    public boolean deleteRequest(Request requestToBeDeleted) {
-        HibernateUtil.beginTransaction();
-        HibernateUtil.getSession().delete(requestToBeDeleted);
-        HibernateUtil.endTransaction();
-        return true;
-    }
 }
 
    
