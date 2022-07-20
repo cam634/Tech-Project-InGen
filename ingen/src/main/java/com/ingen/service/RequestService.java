@@ -11,17 +11,20 @@ import com.ingen.Utils.RequestBusinessRules;;
 public class RequestService implements RequestServiceInterface{
 
     private RequestDaoInterface requestDao;
-    private RequestBusinessRules businessRules;
 
-    public RequestService(RequestDaoInterface requestDao){
+    private RequestBusinessRules businessRules ;
+
+    
+
+    public RequestService(RequestDaoInterface requestDao, RequestBusinessRules businessRules) {
         this.requestDao = requestDao;
         this.businessRules = businessRules;
     }
 
     @Override
-    public Request serviceCreateRequest(Request request){
-        if (this.businessRules.checkValue(request) && this.businessRules.checkRequestReasonLength(request) && this.businessRules.checkReviewReasonLength(request)){
-            return this.requestDao.createRequest(request);
+    public Request serviceCreateRequest(Request test){
+        if (businessRules.checkValue(test) && businessRules.checkRequestReasonLength(test) && businessRules.checkReviewReasonLength(test)){
+            return requestDao.createRequest(test);
         } else {
             throw new InvalidRequest("Invalid request: please try again");
         }

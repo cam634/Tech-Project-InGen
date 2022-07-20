@@ -6,10 +6,8 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.ingen.entitiy.Request;
-import com.ingen.repository.RequestDao;
 import com.ingen.service.RequestServiceInterface;
 import com.ingen.controllers.RequestController;
-import com.ingen.repository.RequestdaoInterface;
 import io.javalin.http.Handler;
 
 
@@ -82,21 +80,21 @@ public class RequestController {
             ctx.status(400);
         };
 
-    }
+    };
 
 
     
 
     public Handler createRequest = ctx -> {
-        try{
+        
             String json = ctx.body();
             Request newRequest = this.gson.fromJson(json, Request.class);
             Request result = this.requestService.serviceCreateRequest(newRequest);
             String resultJson = this.gson.toJson(result);
             ctx.result(resultJson);
             ctx.status(201);
-        }
-        }
+        
+        };
 
 
     }

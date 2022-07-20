@@ -31,7 +31,6 @@ public class RequestServiceTest {
     
         mockDao = Mockito.mock(RequestDao.class); 
         mockRules = Mockito.mock(RequestBusinessRules.class); 
-        mockService = new RequestService(mockDao, mockRules);
     }
 
     @Test
