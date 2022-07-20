@@ -13,6 +13,6 @@ public interface RequestDaoInterface {
 
     Request updateRequest(Request updatedRequest);
 
-    boolean deleteRequest(int id);
+    boolean deleteRequest(Request requestToBeDeleted);
 
 }

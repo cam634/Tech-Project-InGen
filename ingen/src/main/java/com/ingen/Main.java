@@ -1,11 +1,16 @@
 package com.ingen;
 
 
+import com.ingen.Utils.RequestBusinessRules;
 import com.ingen.controllers.EmployeeController;
+import com.ingen.controllers.RequestController;
 import com.ingen.repository.EmployeeDao;
 import com.ingen.repository.EmployeeDaoInterface;
+import com.ingen.repository.RequestDao;
 import com.ingen.service.EmployeeService;
 import com.ingen.service.EmployeeServiceInterface;
+import com.ingen.service.RequestService;
+import com.ingen.service.RequestServiceInterface;
 
 import io.javalin.Javalin;
 
@@ -36,7 +41,18 @@ public class Main {
 
         app.patch("/employee", employeeController.loginEmployee);
 
+        RequestDao requestDao = new RequestDao();
+        RequestServiceInterface requestService = new RequestService(requestDao);
+        RequestController requestController = new RequestController(requestService);
         
+
+        app.get("/request", requestController.getAllRequest);
+
+        app.post("/request", requestController.createRequest);
+
+        app.put("/request", requestController.updateRequest);
+
+        app.delete("/request", requestController.deleteRequest);
     }
     
 }

@@ -16,7 +16,7 @@ public interface RequestServiceInterface {
 
     Request serviceUpdateRequest(Request request);
 
-    boolean serviceDeleteRequest(int id);
+    boolean serviceDeleteRequest(Request requestToBeDeleted);
 
     List<Request> getPendingRequests(List<Request> requestList);
 

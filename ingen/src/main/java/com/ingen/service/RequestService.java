@@ -13,7 +13,7 @@ public class RequestService implements RequestServiceInterface{
     private RequestDaoInterface requestDao;
     private RequestBusinessRules businessRules;
 
-    public RequestService(RequestDaoInterface requestDao, RequestBusinessRules businessRules){
+    public RequestService(RequestDaoInterface requestDao){
         this.requestDao = requestDao;
         this.businessRules = businessRules;
     }
@@ -55,8 +55,8 @@ public class RequestService implements RequestServiceInterface{
     }
 
     @Override
-    public boolean serviceDeleteRequest(int id){
-        return this.requestDao.deleteRequest(id);
+    public boolean serviceDeleteRequest(Request requestToBeDeleted){
+        return this.requestDao.deleteRequest(requestToBeDeleted);
     }
 
     @Override

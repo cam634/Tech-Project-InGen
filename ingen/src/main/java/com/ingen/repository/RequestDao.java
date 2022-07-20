@@ -46,10 +46,9 @@ public class RequestDao implements RequestDaoInterface{
     }
 
     @Override
-    public boolean deleteRequest(int id){
+    public boolean deleteRequest(Request requestToBeDeleted) {
         HibernateUtil.beginTransaction();
-        Request request = HibernateUtil.getSession().get(Request.class, id);
-        HibernateUtil.getSession().delete(request);
+        HibernateUtil.getSession().delete(requestToBeDeleted);
         HibernateUtil.endTransaction();
         return true;
     }

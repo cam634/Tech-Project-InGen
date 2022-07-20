@@ -38,8 +38,8 @@ public class RequestController {
         ctx.status(200);
     };
 
-    public Handler serviceGetAllRequest= ctx -> {
-        List<Request> request = this.requestService.serviceGetAllRequest();
+    public Handler getAllRequest= ctx -> {
+        List<Request> request = this.requestService.serviceGetAllRequests();
         
         String requestJSON = this.gson.toJson(request);
         ctx.result(requestJSON);
@@ -52,7 +52,7 @@ public class RequestController {
         // we then use Gson to convert the json string into the java class we are working with
         Request requestToDelete = this.gson.fromJson(json, Request.class);
         // we then pass the java object we created into the appropriate service method for validation
-        this.requestService.serviceRemoveRequest(requestToDelete);
+        this.requestService.serviceDeleteRequest(requestToDelete);
         // because I am not returning any special entity with this method I will use a Map to create my key/value pair message for the json
         Map<String, String> message = new HashMap<>();
         message.put("message", "request was deleted");
