@@ -187,7 +187,7 @@ public class RequestServiceTest {
             mockService.serviceUpdateRequest(badRequest);
             Assert.fail();
         } catch (InvalidRequest e) {
-            Assert.assertEquals("", e.getMessage());
+            Assert.assertEquals("Invalid request: please try again", e.getMessage());
         }
     }
 }
