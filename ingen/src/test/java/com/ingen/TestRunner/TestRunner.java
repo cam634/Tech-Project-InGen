@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.ingen.Pom.Login;
 import com.ingen.Pom.Manager;
-import com.ingen.entitiy.Employee;
+import com.ingen.Pom.Employee;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
