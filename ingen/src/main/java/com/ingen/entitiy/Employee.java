@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.openqa.selenium.WebDriver;
+
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -44,6 +47,9 @@ public class Employee {
     public Employee(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Employee(WebDriver driver) {
     }
 
     public int getId() {
