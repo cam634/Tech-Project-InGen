@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -46,6 +48,7 @@ public class Employee {
         this.password = password;
     }
 
+    
     public int getId() {
         return employeeId;
     }
