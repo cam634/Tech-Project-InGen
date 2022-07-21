@@ -33,12 +33,6 @@ public class Main {
 
         app.get("/employee", employeeController.getAllEmployees);
 
-        app.delete("/employee", employeeController.deleteEmployee);
-
-        app.post("/employee", employeeController.createEmployee);
-
-        app.put("/employee", employeeController.updateEmployee);
-
         app.patch("/employee", employeeController.loginEmployee);
 
         RequestDao requestDao = new RequestDao();
@@ -52,8 +46,6 @@ public class Main {
         app.post("/request", requestController.createRequest);
 
         app.put("/request", requestController.updateRequest);
-
-        app.delete("/request", requestController.deleteRequest);
     }
     
 }

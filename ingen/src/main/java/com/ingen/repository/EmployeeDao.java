@@ -13,17 +13,6 @@ import com.ingen.entitiy.Employee;
 public class EmployeeDao implements EmployeeDaoInterface{
 
 
-@Override
-   public Employee insertEmployee(Employee newEmployee){
-    
-        HibernateUtil.beginTransaction();
-        HibernateUtil.getSession().save(newEmployee);
-        HibernateUtil.endTransaction();
-        return newEmployee ;
-    
-
-   }
-
    @Override
    public List<Employee> getAllEmployees(){
     HibernateUtil.beginTransaction();
@@ -31,20 +20,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
     HibernateUtil.endTransaction();
     return employeelist;
    }
-   @Override
-   public boolean deleteEmployee(Employee employeeToBeDeleted){
-    HibernateUtil.beginTransaction();
-    HibernateUtil.getSession().delete(employeeToBeDeleted);
-    HibernateUtil.endTransaction();
-    return true;
-   }
-   @Override
-    public Employee updateEmployee(Employee updatedEmployee){
-     HibernateUtil.beginTransaction();
-     HibernateUtil.getSession().update(updatedEmployee);
-     HibernateUtil.endTransaction();
-     return updatedEmployee;
-    }
+
 
 
     @Override

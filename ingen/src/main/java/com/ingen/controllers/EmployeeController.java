@@ -27,71 +27,8 @@ public class EmployeeController {
         ctx.status(200);
     };
 
-    public Handler deleteEmployee = ctx -> {
+    
 
-        try{
-        String json = ctx.body();
-
-        Employee employeeToDelete = this.gson.fromJson(json, Employee.class);
-
-        this.employeeService.serviceDeleteEmployee(employeeToDelete);
-
-        Map<String, String> message = new HashMap<>();
-
-        message.put("message", "Employee deleted successfully");
-
-        String resultJson = this.gson.toJson(message);
-
-        ctx.result(resultJson);
-        ctx.status(200);
-        }catch(Exception e){
-            Map<String, String> message = new HashMap<>();
-
-            message.put("message", "Employee not deleted");
-
-            String resultJson = this.gson.toJson(message);
-
-            ctx.result(resultJson);
-            ctx.status(400);
-        }
-
-    };
-
-
-    public Handler createEmployee = ctx ->{
-        try{
-        String json = ctx.body();
-        Employee employeeToCreate = this.gson.fromJson(json, Employee.class);
-        Employee createdEmployee = this.employeeService.serviceCreateEmployee(employeeToCreate);
-        String resultJson = this.gson.toJson(createdEmployee);
-        ctx.result(resultJson);
-        ctx.status(201);
-        }catch(javax.persistence.PersistenceException e){
-        Map<String, String> message = new HashMap<>();
-        message.put("message", e.getMessage());
-        String messageJson = this.gson.toJson(message);
-        ctx.result(messageJson);
-        ctx.status(400);
-    }
-    };
-
-    public Handler updateEmployee = ctx -> {
-        try{
-        String json = ctx.body();
-        Employee employeeToUpdate = this.gson.fromJson(json, Employee.class);
-        Employee updatedEmployee = this.employeeService.serviceUpadteEmployee(employeeToUpdate);
-        String resultJson = this.gson.toJson(updatedEmployee);
-        ctx.result(resultJson);
-        ctx.status(200);}
-        catch(javax.persistence.PersistenceException e){
-              Map<String, String> message = new HashMap<>();
-              message.put("message", e.getMessage());
-              String messageJson = this.gson.toJson(message);
-              ctx.result(messageJson);
-              ctx.status(400);
-        
-    };
-};
 
 
 public Handler loginEmployee = ctx -> {
