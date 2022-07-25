@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manager Page</title>
+</head>
+<body>
+    <h1 id="name">Manager Page</h1>
+
+    <button id="logoutButton" onclick="logout()">Logout</button>
+
+    <table>
+        <tr>
+            <td>Total Company Reimbursements:</td><td id="globalReimbursements"></td>
+        </tr>
+        <tr>
+            <td>Total Personally Approved Reimbursements:</td><td id="personallyApprovedReimbursements"></td>
+        </tr>
+    </table>
+
+    <table id="requestTable">
+        <caption>
+            <h1>Requests</h1>
+        </caption>
+        <tr>
+            <th>Id</th><th>Requester</th><th>Amount</th><th>Reason</th><th>Your Response</th><th></th>
+        </tr>
+    </table>
+
+</body>
+<script>
+    const globalReimbursementsTD = document.getElementById("globalReimbursements");
+    const personallyApprovedReimbursementsTD = document.getElementById("personallyApprovedReimbursements");
+    const username = sessionStorage.getItem("username");
+    const fname = sessionStorage.getItem("fname");
+    const lname = sessionStorage.getItem("lname");
+    const role = sessionStorage.getItem("role");
+
+    let globalReimbursements = 0;
+    let personallyApprovedReimbursements = 0;
+    getRequests();
+
+    function logout(){
+        sessionStorage.setItem("username", "");
+        sessionStorage.setItem("fname", "");
+        sessionStorage.setItem("lname", "");
+        sessionStorage.setItem("role", "");
+        window.location.href = "login.html";
+    }
+
+    async function getRequests(){
+        
+        let httpResponse = await fetch(`http://localhost:8080/requests`);
+        
+        if (httpResponse.status !== 200){
+            let responseBody = await httpResponse.json(); 
+            alert(responseBody.detail);
+            return;
+        }
+        
+        let responseBody = await httpResponse.json();
+
+        for (let i = 0; i < responseBody.length; i++){
+            let requestObj = responseBody[i];
+
+            if (requestObj.status === "Pending"){
+                createRow(requestObj);   
+            }
+
+            if (requestObj.status === "Approved" && requestObj.reviewedBy === username){
+                personallyApprovedReimbursements += requestObj.value;
+            } 
+            
+            if (requestObj.status === "Approved"){
+                globalReimbursements += requestObj.value;
+
+            }
+        }
+
+        globalReimbursementsTD.innerText = globalReimbursements;
+        personallyApprovedReimbursementsTD.innerText = personallyApprovedReimbursements;
+    }
+
+    function createRow(requestObj){
+        const requestTable = document.getElementById("requestTable");
+        const node = document.createElement("tr");
+    
+        node.setAttribute("id", `row${requestObj.requestId}`);
+        node.setAttribute("class", "requestRow");
+
+        node.innerHTML =   `<td id="requestId${requestObj.requestId}">${requestObj.requestId}</td>
+                            <td id="requestedBy${requestObj.requestId}">${requestObj.requestedBy}</td>
+                            <td id="value${requestObj.requestId}">${requestObj.value}</td>
+                            <td id="requestReason${requestObj.requestId}">${requestObj.requestReason}</td>
+                            <td><textarea type="text" id="reviewReason${requestObj.requestId}"></textarea></td>
+                            <td><button class="approveButton" id="approveButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Approved')">Approve</button>
+                                <button class="denyButton" id="denyButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Denied')">Deny</button></td>
+                            `;
+
+        requestTable.appendChild(node);
+    }
+
+    async function reviewRequest(requestId, newStatus){
+    
+       
+        let updateInfo = {
+            requestId: requestId,
+            status: newStatus,
+            reviewReason: document.getElementById(`reviewReason${requestId}`).value,
+            reviewedBy: username,
+            value: document.getElementById(`value${requestId}`).value,
+            requestReason: document.getElementById(`requestReason${requestId}`).value,
+            requestedBy: document.getElementById(`requestedBy${requestId}`).value
+        }
+
+        let updateJSON = JSON.stringify(updateInfo);
+
+        let config = {
+            method: "PATCH", 
+            headers: {'Content-Type':"application/json"},
+            body: updateJSON
+        }
+
+        let httpResponse = await fetch(`http://localhost:8080/request`, config);
+        
+        if (httpResponse.status === 200){
+            removeRow(requestId);
+            let responseBody = await httpResponse.json(); 
+        } else {
+            let responseBody = await httpResponse.json(); 
+            alert(responseBody.detail);
+        }
+    }
+
+    function removeRow(requestId){
+        const requestRow = document.getElementById(`row${requestId}`);
+        requestRow.remove();
+    }
+
+</script>
+</html>

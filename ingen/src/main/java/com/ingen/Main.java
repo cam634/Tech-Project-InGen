@@ -19,7 +19,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Javalin app = Javalin.create(config ->{
             config.enableCorsForAllOrigins();
             config.enableDevLogging();
@@ -30,7 +29,6 @@ public class Main {
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
         EmployeeController employeeController = new EmployeeController(employeeService);
 
-
         app.get("/employee", employeeController.getAllEmployees);
 
         app.patch("/employee", employeeController.loginEmployee);
@@ -40,12 +38,13 @@ public class Main {
         RequestServiceInterface requestService = new RequestService(requestDao, requestBusinessRules);
         RequestController requestController = new RequestController(requestService);
         
+        app.get("/requests", requestController.getAllRequests);
 
-        app.get("/request", requestController.getAllRequest);
+        app.get("/requests/{username}", requestController.getRequestsByUsername);
 
         app.post("/request", requestController.createRequest);
 
-        app.put("/request", requestController.updateRequest);
+        app.patch("/request", requestController.updateRequest);
     }
     
 }
