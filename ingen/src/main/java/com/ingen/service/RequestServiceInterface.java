@@ -1,22 +1,16 @@
 package com.ingen.service;
 
 import java.util.List;
-
 import com.ingen.entitiy.Request;
 
 public interface RequestServiceInterface {
   
     Request serviceCreateRequest(Request request);
 
-    List<Request> serviceGetSelfRequests(String username);
+    List<Request> serviceGetRequestsByUsername(String username);
 
-    List<Request> serviceGetAllRequests();
+    List<Request> serviceGetRequests();
 
     Request serviceUpdateRequest(Request request);
 
-    List<Request> getPendingRequests(List<Request> requestList);
-
-    int getApprovalTotal(List<Request> requestList);
-
-    int getSelfApprovalTotal(List<Request> requestList, String username);
 }

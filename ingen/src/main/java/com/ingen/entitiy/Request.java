@@ -14,13 +14,17 @@ public class Request {
     @GeneratedValue
     @Column(name = "REQUEST_ID")
     private int requestId;
+    @Column(name = "STATUS")
     private String status;
+    @Column(name = "VALUE")
     private int value;
-    @Column(length = 500)
+    @Column(name="REQUEST_REASON", length = 500)
     private String requestReason;
-    @Column(length = 500)
+    @Column(name="REVIEW_REASON", length = 500)
     private String reviewReason;
+    @Column(name = "REQUESTED_BY")
     private String requestedBy;
+    @Column(name = "REVIEWED_BY")
     private String reviewedBy;
 
     public Request() {

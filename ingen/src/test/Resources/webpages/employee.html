@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Page</title>
+</head>
+<body>
+
+    <h1>Employee Page</h1>
+    <h1 id="firstName"></h1>
+
+    <button id="logoutButton" onclick="logout()">Logout</button>
+
+    <table>
+        <tr>
+            <td>Total Reimbursements:</td><td id="totalReimbursements"></td>
+        </tr>
+    </table>
+
+    <table>
+        <caption>
+            <h1>Create Claim Request</h1>
+        </caption>
+        <tr>
+            <th>Requested Amount</th><th>Reason for Request</th><th> </th>
+        </tr>
+        <tr>
+            <td><textarea type="number" id="requestValue"></textarea></td>
+            <td><textarea type="text" id="requestReason"></textarea></td>
+            <td><button id="requestButton" onclick="createRequest()">Create Request</button></td>
+        </tr>
+    </table>
+
+    <table id="requestTable">
+        <caption>
+            <h1>Requests</h1>
+        </caption>
+        <tr>
+            <th>Status</th><th>Amount</th><th>Request Reason</th><th>Manager Response</th>
+        </tr>
+    </table>
+
+</body>
+<script>
+    const username = sessionStorage.getItem("username");
+    const fname = sessionStorage.getItem("fname");
+    const lname = sessionStorage.getItem("lname");
+    const role = sessionStorage.getItem("role");
+    let totalReimbursements = 0;
+
+    const firstName = document.getElementById("firstName");
+    firstName.innerText = fname;
+
+    getRequests();
+
+    const reimbursementTD = document.getElementById("totalReimbursements");
+    reimbursementTD.innerText = totalReimbursements;
+
+    function logout(){
+        sessionStorage.setItem("username", "");
+        sessionStorage.setItem("fname", "");
+        sessionStorage.setItem("lname", "");
+        sessionStorage.setItem("role", "");
+        window.location.href = "login.html";
+    }
+
+    async function createRequest() {
+        let requestInfo = {
+            status: "Pending",
+            value: document.getElementById("requestValue").value,
+            requestReason: document.getElementById("requestReason").value,
+            reviewReason: "",
+            requestedBy: username,
+            reviewedBy: ""
+        }
+
+        let requestJSON = JSON.stringify(requestInfo);
+
+        let config = {
+            method: "POST", 
+            headers: {'Content-Type':"application/json"},
+            body: requestJSON
+        }
+
+        let httpResponse = await fetch("http://localhost:8080/request", config);
+
+        if(httpResponse.status === 201){ 
+            let responseBody = await httpResponse.json(); 
+            //createRow(responeBody[0]);
+            getRequests();
+
+        } else {
+            let responseBody = await httpResponse.json(); 
+            alert(responseBody.detail);
+        }
+
+    }
+
+    async function getRequests(){
+        const requestTable = document.getElementById("requestTable");
+        let httpResponse = await fetch(`http://localhost:8080/requests/${username}`);
+        
+
+
+        requestTable.innerHTML =    `<caption>
+                                        <h1>Requests</h1>
+                                    </caption>
+                                    <tr>
+                                        <th>Status</th><th>Amount</th><th>Request Reason</th><th>Manager Response</th>
+                                    </tr>`
+
+        if (httpResponse.status !== 200){
+            let responseBody = await httpResponse.json(); 
+            alert(responseBody.detail);
+            return;
+        }
+
+        let responseBody = await httpResponse.json();
+        
+    
+        for (let i = 0; i < responseBody.length; i++){
+            let requestObj = responseBody[i];
+            createRow(requestObj);  
+            
+            //calculate total reimbursements
+            if (requestObj.status === "Approved"){
+                totalReimbursements += requestObj.value;
+            }
+        }
+    }
+
+    function createRow(requestObj){
+        const requestTable = document.getElementById("requestTable");
+        const node = document.createElement("tr");
+    
+        node.setAttribute("id", `row${requestObj.requestId}`);
+        node.setAttribute("class", "requestRow");
+
+        node.innerHTML =   `<td>${requestObj.status}</td>
+                            <td>${requestObj.value}</td>
+                            <td>${requestObj.requestReason}</td>
+                            <td>${requestObj.reviewReason}</td>
+                            `;
+
+        requestTable.appendChild(node);
+    }
+
+</script>
+</html>
