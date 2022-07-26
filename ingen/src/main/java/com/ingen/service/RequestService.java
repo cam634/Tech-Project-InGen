@@ -51,4 +51,9 @@ public class RequestService implements RequestServiceInterface{
         return this.requestDao.deleteRequest(requestToBeDeleted);
     } 
 
+    @Override
+    public Request serviceGetRequestById(int requestId){
+        return this.requestDao.getRequestById(requestId);
+    }
+
 }

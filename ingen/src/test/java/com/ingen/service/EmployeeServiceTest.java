@@ -22,7 +22,7 @@ public class EmployeeServiceTest {
         employeeService = new EmployeeService(employeeDao);
         Employee createdEmployee = employeeService.serviceCreateEmployee(testEmployee);
         EmployeeServiceTest.employeeIdHolder = createdEmployee.getId();
-        System.out.println("A" + EmployeeServiceTest.employeeIdHolder);
+        
     }
 
     @Test
