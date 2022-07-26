@@ -12,7 +12,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: 'Tech-Project-InGen/ingen/src/test/Resources/Webpages'
+        source_file: 'ingen/src/test/Resources/webpages'
         destination_repo: 'cam634/cam634.github.io'
         destination_folder: 'Webages'
         user_email: 'cam6352@gmail.com'
