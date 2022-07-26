@@ -13,4 +13,6 @@ public interface RequestServiceInterface {
 
     Request serviceUpdateRequest(Request request);
 
+    boolean serviceDeleteRequest(Request request);
+
 }

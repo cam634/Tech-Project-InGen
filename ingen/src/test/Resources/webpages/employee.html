@@ -3,7 +3,7 @@
 <head>
     <title>Employee Page</title>
 </head>
-<body>
+<body >
 
     <h1>Employee Page</h1>
     <h1 id="firstName"></h1>
@@ -46,11 +46,12 @@
     const lname = sessionStorage.getItem("lname");
     const role = sessionStorage.getItem("role");
     let totalReimbursements = 0;
+    getRequests();
 
     const firstName = document.getElementById("firstName");
     firstName.innerText = fname;
 
-    getRequests();
+
 
     const reimbursementTD = document.getElementById("totalReimbursements");
     reimbursementTD.innerText = totalReimbursements;
@@ -85,7 +86,6 @@
 
         if(httpResponse.status === 201){ 
             let responseBody = await httpResponse.json(); 
-            //createRow(responeBody[0]);
             getRequests();
 
         } else {
@@ -99,8 +99,6 @@
         const requestTable = document.getElementById("requestTable");
         let httpResponse = await fetch(`http://localhost:8080/requests/${username}`);
         
-
-
         requestTable.innerHTML =    `<caption>
                                         <h1>Requests</h1>
                                     </caption>
@@ -116,7 +114,6 @@
 
         let responseBody = await httpResponse.json();
         
-    
         for (let i = 0; i < responseBody.length; i++){
             let requestObj = responseBody[i];
             createRow(requestObj);  

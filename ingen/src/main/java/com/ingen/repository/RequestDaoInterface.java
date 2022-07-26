@@ -9,6 +9,10 @@ public interface RequestDaoInterface {
 
     List<Request> getAllRequests();
 
+    Request getRequestById(int requestId);
+
     Request updateRequest(Request updatedRequest);
+
+    boolean deleteRequest(Request requestToBeDeleted);
 
 }
