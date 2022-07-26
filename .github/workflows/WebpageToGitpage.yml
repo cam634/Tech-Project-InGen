@@ -14,7 +14,6 @@ jobs:
       with:
         source_file: 'ingen/src/test/Resources/webpages'
         destination_repo: 'cam634/cam634.github.io'
-        destination_folder: 'Webages'
         user_email: 'cam6352@gmail.com'
         user_name: 'cam634'
         commit_message: 'Updating gitpage from webpage folder!'
