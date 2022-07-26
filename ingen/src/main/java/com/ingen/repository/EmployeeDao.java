@@ -10,7 +10,7 @@ import com.ingen.entitiy.Employee;
 
 
 
-public class EmployeeDao implements EmployeeDaoInterface{
+public class EmployeeDao implements EmployeedaoInterface{
 
 
    @Override

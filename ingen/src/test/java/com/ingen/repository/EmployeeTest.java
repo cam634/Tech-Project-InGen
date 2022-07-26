@@ -10,7 +10,7 @@ import com.ingen.entitiy.Employee;
 
 
 public class EmployeeTest {
-    public static EmployeeDaoInterface EmployeeDao;
+    public static EmployeedaoInterface EmployeeDao;
 
     @BeforeClass
     public static void setup(){

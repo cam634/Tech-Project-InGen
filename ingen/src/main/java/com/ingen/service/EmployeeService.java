@@ -3,15 +3,15 @@ package com.ingen.service;
 import java.util.List;
 
 import com.ingen.entitiy.Employee;
-import com.ingen.repository.EmployeeDaoInterface;
+import com.ingen.repository.EmployeedaoInterface;
 import com.ingen.exceptions.Invalid;
 
 
 public class EmployeeService implements EmployeeServiceInterface {
 
-    private EmployeeDaoInterface employeeDao;
+    private EmployeedaoInterface employeeDao;
 
-    public EmployeeService(EmployeeDaoInterface employeedao) {
+    public EmployeeService(EmployeedaoInterface employeedao) {
         this.employeeDao = employeedao;
     }
 

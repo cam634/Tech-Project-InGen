@@ -5,7 +5,7 @@ import com.ingen.Utils.RequestBusinessRules;
 import com.ingen.controllers.EmployeeController;
 import com.ingen.controllers.RequestController;
 import com.ingen.repository.EmployeeDao;
-import com.ingen.repository.EmployeeDaoInterface;
+import com.ingen.repository.EmployeedaoInterface;
 import com.ingen.repository.RequestDao;
 import com.ingen.service.EmployeeService;
 import com.ingen.service.EmployeeServiceInterface;
@@ -25,7 +25,7 @@ public class Main {
 
         }).start();
 
-        EmployeeDaoInterface employeeDao = new EmployeeDao();
+        EmployeedaoInterface employeeDao = new EmployeeDao();
         EmployeeServiceInterface employeeService = new EmployeeService(employeeDao);
         EmployeeController employeeController = new EmployeeController(employeeService);
 
