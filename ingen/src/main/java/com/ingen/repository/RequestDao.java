@@ -1,15 +1,9 @@
 package com.ingen.repository;
 
-
-
-
 import java.util.List;
-
 import com.ingen.Utils.HibernateUtil;
 import com.ingen.entitiy.Request;
 import com.ingen.repository.RequestDao;
-
-
 
 public class RequestDao implements RequestDaoInterface{
 
@@ -21,8 +15,6 @@ public class RequestDao implements RequestDaoInterface{
         return newRequest;
     }
 
-
-
     @Override
     public List<Request> getAllRequests(){
         HibernateUtil.beginTransaction();
@@ -32,11 +24,27 @@ public class RequestDao implements RequestDaoInterface{
     }
 
     @Override
+    public Request getRequestById(int requestId){
+        HibernateUtil.beginTransaction();
+        Request request = HibernateUtil.getSession().get(Request.class, requestId);
+        HibernateUtil.endTransaction();
+        return request;
+    }
+
+    @Override
     public Request updateRequest(Request updatedRequest) {
         HibernateUtil.beginTransaction();
         HibernateUtil.getSession().update(updatedRequest);
         HibernateUtil.endTransaction();
         return updatedRequest;
+    }
+
+    @Override
+    public boolean deleteRequest(Request requestToBeDeleted) {
+        HibernateUtil.beginTransaction();
+        HibernateUtil.getSession().delete(requestToBeDeleted);
+        HibernateUtil.endTransaction();
+        return true;
     }
 
 }

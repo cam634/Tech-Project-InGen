@@ -1,8 +1,7 @@
 package com.ingen.Utils;
 
-import java.util.Iterator;
 import java.util.List;
-
+import java.util.ListIterator;
 import com.ingen.entitiy.Request;
 
 public class RequestBusinessRules {
@@ -33,7 +32,7 @@ public class RequestBusinessRules {
 
     //Returns a list of all requests specific user has made. 
     public List<Request> getSelfRequests(List<Request> requestList, String username){
-        Iterator<Request> itr = requestList.iterator();
+        ListIterator<Request> itr = requestList.listIterator();
         while (itr.hasNext()) {
             Request request = itr.next(); 
             if (!(request.getRequestedBy().equals(username))){

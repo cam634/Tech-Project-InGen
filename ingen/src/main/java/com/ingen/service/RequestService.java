@@ -1,6 +1,5 @@
 package com.ingen.service;
 
-
 import java.util.List;
 import com.ingen.entitiy.Request;
 import com.ingen.exceptions.InvalidRequest;
@@ -41,10 +40,15 @@ public class RequestService implements RequestServiceInterface{
 
     @Override
     public Request serviceUpdateRequest(Request request){
-        if (this.businessRules.checkReviewReasonLength(request)){
+        if (businessRules.checkValue(request) && businessRules.checkRequestReasonLength(request) && businessRules.checkReviewReasonLength(request)){
             return this.requestDao.updateRequest(request);
         } else {
             throw new InvalidRequest("Invalid request: please try again");
         }
     }
+
+    public boolean serviceDeleteRequest(Request requestToBeDeleted){
+        return this.requestDao.deleteRequest(requestToBeDeleted);
+    } 
+
 }
