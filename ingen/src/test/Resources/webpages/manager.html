@@ -106,10 +106,10 @@
             requestId: requestId,
             status: newStatus,
             reviewReason: document.getElementById(`reviewReason${requestId}`).value,
-            reviewedBy: username,
-            value: document.getElementById(`value${requestId}`).value,
-            requestReason: document.getElementById(`requestReason${requestId}`).value,
-            requestedBy: document.getElementById(`requestedBy${requestId}`).value
+            reviewedBy: sessionStorage.getItem("username"),
+            value: document.getElementById(`value${requestId}`).innerText,
+            requestReason: document.getElementById(`requestReason${requestId}`).innerText,
+            requestedBy: document.getElementById(`requestedBy${requestId}`).innerText
         }
 
         let updateJSON = JSON.stringify(updateInfo);
