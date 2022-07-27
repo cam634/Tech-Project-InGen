@@ -37,7 +37,7 @@ public class TestRunner {
     public static void setup(){
         System.setProperty("webdriver.chrome.driver", "src/test/Resources/chromedriver.exe");
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 1);
+        wait = new WebDriverWait(driver, 5);
         login = new Login(driver);
         manager = new Manager(driver);
         employee = new Employee(driver);

@@ -21,7 +21,7 @@ import io.cucumber.java.en.When;
 
 public class ManagerSteps {
     public static int idHolder;
-    public static Request newRequest = new Request("status", 100, "Lorem ipsum", "Check", "TestManager", "employee");
+    public static Request newRequest = new Request("Pending", 100, "Lorem ipsum", " " ,"TestEmployee", "");
     public static RequestDao Dao = new RequestDao();
     public static RequestBusinessRules businessRules = new RequestBusinessRules();
     public static RequestService newRequestService = new RequestService(Dao, businessRules);
@@ -67,7 +67,7 @@ public class ManagerSteps {
     @When("the manager selects approve reimbursement requests")
     public void the_manager_selects_approve_reimbursement_requests() {
         // Write code here that turns the phrase above into concrete actions
-        TestRunner.driver.findElement(By.id("approve" + idHolder)).click();
+        TestRunner.driver.findElement(By.id("approveButton" + idHolder)).click();
     }
     @Then("there is an alert that the decision was input")
     public void there_is_an_alert_that_the_decision_was_input() {
@@ -80,7 +80,7 @@ public class ManagerSteps {
     @When("the manager selects deny reimbursement requests")
     public void the_manager_selects_deny_reimbursement_requests() {
         // Write code here that turns the phrase above into concrete actions
-        TestRunner.driver.findElement(By.id("deny" + idHolder)).click();
+        TestRunner.driver.findElement(By.id("denyButton" + idHolder)).click();
     }
 
     @When("an manager enters clicks on logout button")
