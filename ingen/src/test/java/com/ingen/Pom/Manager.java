@@ -41,4 +41,8 @@ public class Manager {
     public void logoutButton(){
         this.logoutButton.click();
     }
+
+    
+
+    
 }

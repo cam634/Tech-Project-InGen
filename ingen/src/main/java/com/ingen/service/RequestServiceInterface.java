@@ -15,4 +15,6 @@ public interface RequestServiceInterface {
 
     boolean serviceDeleteRequest(Request request);
 
+    Request serviceGetRequestById(int requestId);
+
 }
