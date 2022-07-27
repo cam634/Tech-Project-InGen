@@ -17,7 +17,7 @@ public class EmployeeSteps {
 @Given("the employee is on the employee homepage")
 public void the_employee_is_on_the_employee_homepage() {
     // Write code here that turns the phrase above into concrete actions
-    TestRunner.driver.get("https://cam634.github.io/employee");
+    TestRunner.driver.get("https://cam634.github.io/webpages/employee");
 }
 
 @When("the employee enters the amount of money to be reimbursed in the reimbursement textbox")
