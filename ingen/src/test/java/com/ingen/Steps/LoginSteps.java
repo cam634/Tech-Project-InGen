@@ -15,7 +15,7 @@ public class LoginSteps {
 @Given("the employee is on the login page")
 public void the_employee_is_on_the_login_page() {
     // Write code here that turns the phrase above into concrete actions
-    TestRunner.driver.get("https://cam634.github.io/login");
+    TestRunner.driver.get("https://cam634.github.io/webpages/login");
 }
 
 @When("the manager enters their correct username")
