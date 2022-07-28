@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Login Page</title>
+    <link rel="icon" href="assets\jurassic-park-icon.jpg">
 </head>
 <body>
 
@@ -9,19 +10,18 @@
 
     <table>
         <tr>
-            <td>
-                <label for="username"><b>Username:</b></label>
+            <td id="loginMessage" style="color:red; font-weight:bold">
+                &#8203
             </td>
+        </tr>
+        <tr>
             <td> 
-                <Input type="text" id="username">
+                <Input type="text" id="username" placeholder="Username">
             </td>
         </tr>
         <tr>
             <td>
-                <label for="password"><b>Password:</b></label>
-            </td>
-            <td>
-                <Input type="password" id="password">
+                <Input type="password" id="password" placeholder="Password">
             </td>
         </tr>
         <tr>
@@ -36,6 +36,10 @@
     
 
     async function login(){
+        let usernameBox = document.getElementById("username");
+        let passwordBox = document.getElementById("password");
+        usernameBox.classList.remove("redClass");
+        passwordBox.classList.remove("redClass");
 
         let loginInfo = {
             username: document.getElementById("username").value,
@@ -53,7 +57,10 @@
         let httpResponse = await fetch("http://localhost:8080/employee", config);
 
         if(httpResponse.status === 200){ 
-            
+            document.getElementById("loginMessage").innerText = "";
+            usernameBox.classList.add("greenClass");
+            passwordBox.classList.add("greenClass");
+
             let responseBody = await httpResponse.json(); 
             sessionStorage.setItem("username", responseBody.username);
             sessionStorage.setItem("fname", responseBody.fname);
@@ -66,8 +73,15 @@
                 window.location.href = "manager.html";
             }
         } else {
-            let responseBody = await httpResponse.json(); 
-            alert(responseBody.detail);
+            usernameBox.classList.add("redClass");
+            passwordBox.classList.add("redClass");
+
+            document.getElementById("loginMessage").innerText = "Bad username and/or password!";
+
+            //let responseBody = await httpResponse.json(); 
+            //alert(responseBody.detail);
+
+
         }
 
 
@@ -109,5 +123,29 @@ table{
 img{
     margin: auto;
 }
+
+
+.greenClass {
+    background-color: greenyellow;
+}
+
+
+.redClass {
+    background-color: white;
+    animation-name: reding;
+    animation-duration: 0.25s;
+}
+
+@keyframes reding {
+    from {background-color: white;}
+    to {background-color: red;}
+}
+
+
+</style>
+
+
+
+
 </style>
 </html>
