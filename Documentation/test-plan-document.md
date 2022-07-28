@@ -28,43 +28,43 @@ For our project the technologies being utilized are Java, Selenium, cucumber, Ja
 
 ## Sign in Test Suite
 As a user I want to be able to sign in to our website. 
-    Unit test
-        When given a password and username return the user -- Completed by Cameron
-            method: loginEmployee()
-    Service Tetst 
-        N/A
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Unit test
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        When given a password and username return the user -- Completed by Cameron
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          method: loginEmployee()
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Service Tetst 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        N/A
 
-As a admin I want to be able to get all employee
-    Unit test 
-       return a list of all employees --Completed by Cameron Hauser 
-            Method: getAllEmployees()
-    Service Test
-        N/A
+<br />As a admin I want to be able to get all employee
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Unit test 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      return a list of all employees --Completed by Cameron Hauser 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           Method: getAllEmployees()
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Service Test
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        N/A
 
 ## Request Test Suite
 As a Employee I want to be able to be able to create a reimbursment request(Will be in pending table)
-    Unit Test -- Completed By Che
-        Create reimbursment request with all fields -- Completed By Nirlouse 
-            Method: CreateReimbursmentRequest()
-    Service Test -- Completed by Che
-        Employees must only be able to request up to $1000 on the request -- Completed by Che
-            Method:checkValue() -- Completed by Che
-        Employees must provide a reason for the reimbursement request no longer than 500 characters -- Completed by Che
-            Method: checkRequestReasonLength() -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Unit Test -- Completed By Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Create reimbursment request with all fields -- Completed By Nirlouse 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          Method: CreateReimbursmentRequest()
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Service Test -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Employees must only be able to request up to $1000 on the request -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               Method:checkValue() -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Employees must provide a reason for the reimbursement request no longer than 500 characters -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;             Method: checkRequestReasonLength() -- Completed by Che
 
 As an Employee I want to be able to see my previous request
-    Unit Test -- Completed by Che
-       View all request -- Completed by Nirlouse 
-            Method: getAllRequests()
-        View all request by Id -- Completed by Che 
-            Method: viewDecidedRequest()
-As a manager I want to be able to update request with my deciosn 
-    Unit Test -- Completed by Che 
-        Update request -- completed by Nirlouse 
-            Method:checkReviewReasonLength();
-        Service Test -- Completed by Che
-            Managers must provide a reason no longer then 500 charcters when updating a request 
-                Method: checkRequestReasonLength() -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit Test -- Completed by Che
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       View all request -- Completed by Nirlouse 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               Method: getAllRequests()
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         View all request by Id -- Completed by Che 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              Method: viewDecidedRequest()
+<br />As a manager I want to be able to update request with my deciosn 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Unit Test -- Completed by Che 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       Update request -- completed by Nirlouse 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            Method:checkReviewReasonLength();
+ <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       Service Test -- Completed by Che
+ <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          Managers must provide a reason no longer then 500 charcters when updating a request 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 Method: checkRequestReasonLength() -- Completed by Che
         
 
 
