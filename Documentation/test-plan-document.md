@@ -1,12 +1,4 @@
-Tech-Project (Test Plan) 
-
- Prepared by Team 1 
-
-7/12/2022 
-
-  
-
- 
+# InGen Test Plan  
 
 The Ingen company will be building and testing an employee reimbursement system, so that employees can create reimbursement requests from their company, and also view previous reimbursement requests that they have made within the company they work for. within these features we want to give them the ability to do these things so that they can prevent others from accessing their information, get money back that the employee spent for the company and also to see whether they should be able to expect money back or not. Also, with this application we want to give managers the ability to view the reimbursement requests that are made by the employee and immediately start addressing them with the ability to approve or deny.  What this approve or deny feature will do is give the company an awareness whether to pay out or not. After these actions have been taken by both manager and employee, we also want each user to be able to sign out of their homepages.  
 
@@ -32,48 +24,50 @@ For our project the technologies being utilized are Java, Selenium, cucumber, Ja
 7/29/2022: We present our project.  
 
 
-User Stories: 
+#Test Cases
 
---------Sign in--------
-
-As a user I want to be able to be able create an employee
-    Unit Test
-        enter username , password, role, fname, and lname to the data base.
-            insertEmployee()
-    Service Test
-        Only want unique entries in the database
-            method: checkUsername()
-As a user I want to be able to update a employee if i make a mistake
+## Sign in Test Suite
+As a user I want to be able to sign in to our website. 
     Unit test
-        Update any fields if their is a mistake made 
-            method: updateEmployee()
+        When given a password and username return the user -- Completed by Cameron
+            method: loginEmployee()
     Service Tetst 
         N/A
-As a user I want to be able to delete a user if we do not  need them in the data base
-    Unit test 
-        Delete a user completely if they leave the company
 
+As a admin I want to be able to get all employee
+    Unit test 
+       return a list of all employees --Completed by Cameron Hauser 
+            Method: getAllEmployees()
     Service Test
         N/A
---------Employee--------
+
+## Request Test Suite
 As a Employee I want to be able to be able to create a reimbursment request(Will be in pending table)
-    Unit Test 
-        Create reimbursment request with all fields 
+    Unit Test -- Completed By Che
+        Create reimbursment request with all fields -- Completed By Nirlouse 
             Method: CreateReimbursmentRequest()
-    Service Test
-        Employees must only be able to request up to $1000 on the request
-            Method:requestUnderThousand()
-        Employees must provide a reason for the reimbursement request no longer than 500 characters
-            Method: requestUnderCharLimit()
-As an Employee I want to be able to see if my request is pending, accepted or denied
-    Unit Test
-       View all pending request
-            Method: viewPendingRequest()
-        View all Aceepted or rejected request
+    Service Test -- Completed by Che
+        Employees must only be able to request up to $1000 on the request -- Completed by Che
+            Method:checkValue() -- Completed by Che
+        Employees must provide a reason for the reimbursement request no longer than 500 characters -- Completed by Che
+            Method: checkRequestReasonLength() -- Completed by Che
+
+As an Employee I want to be able to see my previous request
+    Unit Test -- Completed by Che
+       View all request -- Completed by Nirlouse 
+            Method: getAllRequests()
+        View all request by Id -- Completed by Che 
             Method: viewDecidedRequest()
-    Service Test
-        Employees must only see their own reimbursement requests
-        Method: getRequestbyPerson()
+As a manager I want to be able to update request with my deciosn 
+    Unit Test -- Completed by Che 
+        Update request -- completed by Nirlouse 
+            Method:checkReviewReasonLength();
+        Service Test -- Completed by Che
+            Managers must provide a reason no longer then 500 charcters when updating a request 
+                Method: checkRequestReasonLength() -- Completed by Che
+        
+
+
 
 
     
