@@ -2,6 +2,7 @@
 
 ## Sign in: 
 Feature: Users of my application should be able to login to their respective homepages 
+
     Scenario: As a manager I want to sign in to view my custom home page 
         Given the employee is on the login page 
         When the Manager enters their correct username 
@@ -18,6 +19,7 @@ Feature: Users of my application should be able to login to their respective hom
 
 ## Employee:  
 Feature: Employees should be able to login to see employee custom homepages 
+
     Scenario: As an employee, I want to sign in to view employee homepage 
         Given the employee is on login page 
         When employee enters username 
@@ -45,6 +47,7 @@ Feature: Employees should be able to login to see employee custom homepages
 
 ## Manager: 
 Feature: Manager on my application should be see approve and deny reimbursment request and provide a reason
+
     Scenario: As a manager I want to Approve Reimbursement Requests 
         Given the manager is on the manager homepage 
         When the manager selects approve reimbursement requests 
