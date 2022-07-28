@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <title>Manager Page</title>
+    <link rel="icon" href="assets\jurassic-park-icon.jpg">
+<style>
+
+    .greenClass {
+        background-color: white;
+        animation-name: greening;
+        animation-duration: 0.25s;
+    }
+
+    @keyframes greening {
+        from {background-color: white;}
+        to {background-color: greenyellow;}
+    }
+
+    .greened {
+        background-color: greenyellow;
+    }
+
+    .redClass {
+        background-color: white;
+        animation-name: reding;
+        animation-duration: 0.25s;
+    }
+
+    @keyframes reding {
+        from {background-color: white;}
+        to {background-color: red;}
+    }
+
+    .messageButtonsList {
+        list-style-type: none;
+    }
+
+    .buttonBr {
+            display: block;
+            margin-bottom: 0em;
+        }
+
+    #userImg{
+        width:300px;
+        height:300px;
+        object-fit:cover;
+        border-radius:50%;
+    }
+
+</style>
 </head>
 <body>
-    <h1 id="name">Manager Page</h1>
+    <div class="image-cropper"><img id="userImg" src="" alt="User image"></img></div>
 
     <button id="logoutButton" onclick="logout()">Logout</button>
 
@@ -37,7 +83,10 @@
 
     let globalReimbursements = 0;
     let personallyApprovedReimbursements = 0;
+    document.getElementById("userImg").setAttribute("src", `assets/${username}.jpg`);
     getRequests();
+
+
 
     function logout(){
         sessionStorage.setItem("username", "");
@@ -58,6 +107,8 @@
         }
         
         let responseBody = await httpResponse.json();
+
+        responseBody.sort((a, b) => b.requestId - a.requestId);
 
         for (let i = 0; i < responseBody.length; i++){
             let requestObj = responseBody[i];
@@ -92,7 +143,7 @@
                             <td id="value${requestObj.requestId}">${requestObj.value}</td>
                             <td id="requestReason${requestObj.requestId}">${requestObj.requestReason}</td>
                             <td><textarea type="text" id="reviewReason${requestObj.requestId}"></textarea></td>
-                            <td><button class="approveButton" id="approveButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Approved')">Approve</button>
+                            <td><span id="message${requestObj.requestId}" style="color:red; font-weight:bold">&#8203</span><span class="buttonBr"></span><button class="approveButton" id="approveButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Approved')">Approve</button>
                                 <button class="denyButton" id="denyButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Denied')">Deny</button></td>
                             `;
 
@@ -100,13 +151,30 @@
     }
 
     async function reviewRequest(requestId, newStatus){
-    
-       
+        
+        let reviewReasonString = document.getElementById(`reviewReason${requestId}`).value;
+        let reviewReasonBox = document.getElementById(`reviewReason${requestId}`);
+   
+        if (reviewReasonString.length > 500){
+            reviewReasonBox.classList.add("redClass");
+            document.getElementById(`message${requestId}`).innerText = "500 characters max!"
+            setTimeout(function(){ reviewReasonBox.removeAttribute("class") }, 250);
+            return;
+        }
+
+        if (reviewReasonString.length < 1){
+            reviewReasonBox.classList.add("redClass");
+            document.getElementById(`message${requestId}`).innerText = "Must provide a reason!"
+            setTimeout(function(){ reviewReasonBox.removeAttribute("class") }, 250);
+
+            return;
+        }
+
         let updateInfo = {
             requestId: requestId,
             status: newStatus,
             reviewReason: document.getElementById(`reviewReason${requestId}`).value,
-            reviewedBy: sessionStorage.getItem("username"),
+            reviewedBy: username,
             value: document.getElementById(`value${requestId}`).innerText,
             requestReason: document.getElementById(`requestReason${requestId}`).innerText,
             requestedBy: document.getElementById(`requestedBy${requestId}`).innerText
@@ -123,7 +191,24 @@
         let httpResponse = await fetch(`http://localhost:8080/request`, config);
         
         if (httpResponse.status === 200){
-            removeRow(requestId);
+            let globalReimbursements = parseInt(globalReimbursementsTD.innerText);
+            let personallyApprovedReimbursements = parseInt(personallyApprovedReimbursementsTD.innerText);
+            personallyApprovedReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
+            globalReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
+            globalReimbursementsTD.innerText = globalReimbursements;
+            personallyApprovedReimbursementsTD.innerText = personallyApprovedReimbursements;
+
+            let requestRow = document.getElementById(`row${requestId}`);
+            let reviewReasonBox = document.getElementById(`reviewReason${requestId}`);
+            requestRow.classList.add("greened");
+            reviewReasonBox.classList.add("greened");
+            //reviewReasonBox.style.backgroundColor = "#00FF00";
+            //requestRow.style.backgroundColor = "#00FF00";
+            //requestRow.setAttribute("class", "requestRow greened");
+            //reviewReasonBox.setAttribute("class", "requestRow greened");
+            setTimeout(function(){  removeRow(requestId); }, 250);
+
+            //removeRow(requestId);
             let responseBody = await httpResponse.json(); 
         } else {
             let responseBody = await httpResponse.json(); 

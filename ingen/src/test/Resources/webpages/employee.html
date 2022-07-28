@@ -2,11 +2,93 @@
 <html lang="en">
 <head>
     <title>Employee Page</title>
+    <link rel="icon" href="assets\jurassic-park-icon.jpg">
+<style>
+    .greenClass {
+        background-color: white;
+        animation-name: greening;
+        animation-duration: 0.25s;
+    }
+
+    @keyframes greening {
+        from {background-color: white;}
+        to {background-color: greenyellow;}
+    }
+
+    .redClass {
+        background-color: white;
+        animation-name: reding;
+        animation-duration: 0.25s;
+    }
+
+    @keyframes reding {
+        from {background-color: white;}
+        to {background-color: red;}
+    }
+
+    .greened{
+        background-color: greenyellow;
+    }
+
+    @font-face {
+        font-family: "CustomFont";
+        src: url("assets/customfont/jurassicpark-bl48-webfont.woff") format("woff");
+    }
+
+    body {
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+    }
+
+    /*
+    .image-cropper {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .userImg {
+        display: inline;
+        margin-right: 100px;
+        height: 100%;
+        width: auto;
+    } */
+
+    #userImg{
+        width:300px;
+        height:300px;
+        object-fit:cover;
+        border-radius:50%;
+    }
+
+    .container {
+        position: left;
+        text-align: left;
+        color: black;
+    }
+
+    #namePrint {
+        position: absolute;
+        top: 30%;
+        left: 15%;
+        transform: translate(-50%, -50%);
+    }
+
+ 
+
+
+</style>
 </head>
 <body >
 
-    <h1>Employee Page</h1>
-    <h1 id="firstName"></h1>
+    <div class="container">
+        <img id="userImg" src="" alt="User image">
+        <div id="namePrint" class="JPFont"></div>
+    </div>
+    
 
     <button id="logoutButton" onclick="logout()">Logout</button>
 
@@ -20,12 +102,12 @@
         <caption>
             <h1>Create Claim Request</h1>
         </caption>
-        <tr>
-            <th>Requested Amount</th><th>Reason for Request</th><th> </th>
+        <tr style="color:red; font-weight:bold">
+            <th id="valueReject">&#8203</th><th id="reasonReject">&#8203</th> <th>&#8203</th>
         </tr>
         <tr>
-            <td><textarea type="number" id="requestValue"></textarea></td>
-            <td><textarea type="text" id="requestReason"></textarea></td>
+            <td><input  placeholder="Amount Requested"  type="number" id="requestValue"></input></td>
+            <td><textarea  type="text" id="requestReason" placeholder="Enter reason for request."></textarea></td>
             <td><button id="requestButton" onclick="createRequest()">Create Request</button></td>
         </tr>
     </table>
@@ -41,20 +123,17 @@
 
 </body>
 <script>
+    sessionStorage.setItem("totalReimbursements", 0);
     const username = sessionStorage.getItem("username");
     const fname = sessionStorage.getItem("fname");
     const lname = sessionStorage.getItem("lname");
     const role = sessionStorage.getItem("role");
-    let totalReimbursements = 0;
     getRequests();
 
-    const firstName = document.getElementById("firstName");
-    firstName.innerText = fname;
+    const namePrint = document.getElementById("namePrint");
+    namePrint.innerText = `${fname} ${lname}`;
 
-
-
-    const reimbursementTD = document.getElementById("totalReimbursements");
-    reimbursementTD.innerText = totalReimbursements;
+    document.getElementById("userImg").setAttribute("src", `assets/${username}.jpg`);
 
     function logout(){
         sessionStorage.setItem("username", "");
@@ -65,6 +144,38 @@
     }
 
     async function createRequest() {
+        let requestValueBox = document.getElementById("requestValue");
+        let requestReasonBox = document.getElementById("requestReason");
+        let requestValue = document.getElementById("requestValue").value;
+        let requestReason = document.getElementById("requestReason").value;
+        let valueRejectTH = document.getElementById("valueReject");
+        let reasonRejectTH = document.getElementById("reasonReject");
+        
+        //requestValueBox.removeAttribute('class');
+        //requestReasonBox.removeAttribute('class');
+        //requestValueBox.className = "";
+        //requestReasonBox.className="";
+        requestValueBox.classList.remove("redClass");
+        requestReasonBox.classList.remove("redClass");
+        valueRejectTH.innerText = " ";
+        reasonRejectTH.innerText = " ";
+
+        if (!checkValue(requestValue)){
+            requestValueBox.classList.add("redClass");
+            valueRejectTH.innerText = checkValueResponse(requestValue);
+        }
+
+        if (!checkReason(requestReason)){
+            requestReasonBox.classList.add("redClass");
+            reasonRejectTH.innerText = checkReasonResponse(requestReason);
+        }
+
+        if (!checkValue(requestValue) || !checkReason(requestReason)){
+            setTimeout(function(){ removeAllClasses(requestValueBox, requestReasonBox); }, 250);
+            return;
+        }
+
+
         let requestInfo = {
             status: "Pending",
             value: document.getElementById("requestValue").value,
@@ -86,7 +197,12 @@
 
         if(httpResponse.status === 201){ 
             let responseBody = await httpResponse.json(); 
-            getRequests();
+            requestValueBox.classList.add("greenClass");
+            requestReasonBox.classList.add("greenClass");
+            requestValueBox.value="";
+            requestReasonBox.value="";
+            creatRowManually(requestValue, requestReason);
+            setTimeout(function(){ removeAllClasses(requestValueBox, requestReasonBox); }, 250);
 
         } else {
             let responseBody = await httpResponse.json(); 
@@ -114,6 +230,9 @@
 
         let responseBody = await httpResponse.json();
         
+        responseBody.sort((a, b) => b.requestId - a.requestId);
+
+        let totalReimbursements = parseInt(sessionStorage.getItem("totalReimbursements"));
         for (let i = 0; i < responseBody.length; i++){
             let requestObj = responseBody[i];
             createRow(requestObj);  
@@ -123,6 +242,9 @@
                 totalReimbursements += requestObj.value;
             }
         }
+        sessionStorage.setItem("totalReimbursements", totalReimbursements);
+        const reimbursementTD = document.getElementById("totalReimbursements");
+        reimbursementTD.innerText = totalReimbursements;
     }
 
     function createRow(requestObj){
@@ -139,6 +261,60 @@
                             `;
 
         requestTable.appendChild(node);
+    }
+
+    function creatRowManually(value, requestReason){
+        const requestTable = document.getElementById("requestTable");
+        const node = document.createElement("tr");
+
+        node.setAttribute("class", "requestRow greenClass");
+
+        node.innerHTML =   `<td>Pending</td>
+                            <td>${value}</td>
+                            <td>${requestReason}</td>
+                            <td></td>
+                            `;
+
+        requestTable.insertBefore(node, requestTable.children[2]);
+    }
+
+    function checkValue(value){
+        if (value > 0.01 && value <= 1000){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkValueResponse(value){
+        if (value < 0.01) {
+            return "Amount must be >= $0.01"
+        }
+        if (value > 1000){
+            return "Amount must be < $1000"
+        }
+    }
+
+    function checkReason(reason){
+        if (reason.length <= 500 && reason.length > 0){
+            return true;
+        } else {
+            return false; 
+        }
+    }
+
+    function checkReasonResponse(reason){
+        if (reason.length < 1){
+            return "Must provide a reason!"
+        }
+        if (reason.length > 500) {
+            return "500 character maximum!"
+        }
+    }
+
+    function removeAllClasses(element1, element2){
+        element1.removeAttribute('class');
+        element2.removeAttribute('class');
     }
 
 </script>
