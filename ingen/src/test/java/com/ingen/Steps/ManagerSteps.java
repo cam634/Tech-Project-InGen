@@ -1,6 +1,7 @@
 package com.ingen.Steps;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -26,7 +27,7 @@ public class ManagerSteps {
     public static RequestBusinessRules businessRules = new RequestBusinessRules();
     public static RequestService newRequestService = new RequestService(Dao, businessRules);
     
-
+    public static String amountholder; 
 
 
     @Given("the manager is on the manager homepage")
@@ -96,6 +97,27 @@ public class ManagerSteps {
         Assert.assertEquals("Login Page", title);
         Request requestTobeDeleted = newRequestService.serviceGetRequestById(idHolder);
         newRequestService.serviceDeleteRequest(requestTobeDeleted);
+    }
+
+
+
+    @When("the manager sees total amount approved")
+    public void the_manager_sees_total_amount_approved() {
+    // Write code here that turns the phrase above into concrete actions
+    amountholder = TestRunner.driver.findElement(By.id("personallyApprovedReimbursements")).getAttribute("innerText");
+    }
+
+
+    @Then("the manager sees the updated total")
+    public void the_manager_sees_the_updated_total() {
+    String expectedText = Integer.toString(Integer.parseInt(amountholder) + 100);
+    TestRunner.wait.until(ExpectedConditions.textToBe(By.id("personallyApprovedReimbursements"), expectedText));
+    // Write code here that turns the phrase above into concrete actions
+    String newAmount = TestRunner.driver.findElement(By.id("personallyApprovedReimbursements")).getAttribute("innerText");
+    Assert.assertEquals(Integer.parseInt(amountholder) + 100, Integer.parseInt(newAmount));
+    Request requestTobeDeleted = newRequestService.serviceGetRequestById(idHolder);
+    newRequestService.serviceDeleteRequest(requestTobeDeleted);
+
     }
 
 
