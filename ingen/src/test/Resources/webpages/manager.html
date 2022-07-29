@@ -5,40 +5,42 @@
     <link rel="icon" href="assets\jurassic-park-icon.jpg">
 <style>
 
-    .greenClass {
-        background-color: white;
+.greenClass {
+        background-color: transparent;
         animation-name: greening;
         animation-duration: 0.25s;
     }
 
     @keyframes greening {
-        from {background-color: white;}
+        from {background-color: transparent;}
         to {background-color: greenyellow;}
     }
 
-    .greened {
-        background-color: greenyellow;
-    }
-
     .redClass {
-        background-color: white;
+        background-color: transparent;
         animation-name: reding;
         animation-duration: 0.25s;
     }
 
     @keyframes reding {
-        from {background-color: white;}
+        from {background-color: transparent;}
         to {background-color: red;}
     }
 
-    .messageButtonsList {
-        list-style-type: none;
+    .greened{
+        background-color: greenyellow;
     }
 
-    .buttonBr {
-            display: block;
-            margin-bottom: 0em;
-        }
+    @font-face {
+        font-family: "CustomFont";
+        src: url("assets/customfont/jurassicpark-bl48-webfont.woff") format("woff");
+    }
+
+    .JPFont {
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+    }
 
     #userImg{
         width:300px;
@@ -47,28 +49,187 @@
         border-radius:50%;
     }
 
+    .container {
+        position: left;
+        text-align: left;
+        color: black;
+    }
+
+    #namePrint {
+        font-size: 80px;
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+        color: white;
+    }
+
+    .tableTitle {
+        font-size: 60px;
+    }
+
+    .columnTitle {
+        font-size: 40px;
+    }
+
+    .userinfo {
+        font-size: 40px;
+    }
+
+    body {
+        background-image: url("assets/background.jfif");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .dataTable {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+
+    .denyButton{
+        display:inline-block;
+        padding:0.3em 1.2em;
+        margin:0 0.3em 0.3em 0;
+        border-radius:2em;
+        box-sizing: border-box;
+        text-decoration:none;
+        font-family:'Roboto',sans-serif;
+        font-weight:300;
+        color:#FFFFFF;
+        background-color:red;
+        text-align:center;
+        transition: all 0.2s;
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+        font-size: 40px;
+    }
+
+    .denyButton:hover{
+        background-color:darkred;
+    }
+
+    @media all and (max-width:30em){
+        .denyButton {
+            display:block;
+            margin:0.2em auto;
+        }
+    }
+
+    #logoutButton {
+        display:inline-block;
+        padding:0.3em 1.2em;
+        margin:0 0.3em 0.3em 0;
+        border-radius:2em;
+        box-sizing: border-box;
+        text-decoration:none;
+        font-family:'Roboto',sans-serif;
+        font-weight:300;
+        color:#FFFFFF;
+        background-color:red;
+        text-align:center;
+        transition: all 0.2s;
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+        font-size: 40px;
+    }
+
+    #logoutButton:hover {
+        background-color:darkred;
+    }
+
+    @media all and (max-width:30em){
+        #logoutButton {
+            display:block;
+            margin:0.2em auto;
+        }
+    }
+
+    .approveButton{
+        display:inline-block;
+        padding:0.3em 1.2em;
+        margin:0 0.3em 0.3em 0;
+        border-radius:2em;
+        box-sizing: border-box;
+        text-decoration:none;
+        font-family:'Roboto',sans-serif;
+        font-weight:300;
+        color:#FFFFFF;
+        background-color:green;
+        text-align:center;
+        transition: all 0.2s;
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+        font-size: 40px;
+    }
+
+    .approveButton:hover{
+        background-color:darkgreen;
+    }
+
+    @media all and (max-width:30em){
+        .approveButton{
+            display:block;
+            margin:0.2em auto;
+        }
+    }
+
+    .buttonBr:after{
+        content: "\a";
+        white-space: pre;
+    }
+
+button {
+        opacity: 0.7;
+    }
+
+
+
 </style>
 </head>
 <body>
-    <div class="image-cropper"><img id="userImg" src="" alt="User image"></img></div>
+    <div class="container">
+        <img id="userImg" src="" alt="User image">
+        <table class="JPFont" id="namePrint"><tr><td id="fnamePrint"></td><td></td><td id="lnamePrint"></td></tr></table>
+        <div id="namePrint" class="JPFont"></div>
+    </div>
 
-    <button id="logoutButton" onclick="logout()">Logout</button>
 
-    <table>
+    <table id="userinfo">
         <tr>
-            <td>Total Company Reimbursements:</td><td id="globalReimbursements"></td>
+            <td class="JPFont userinfo">Username:</td><td id="usernamePrint"></td>
         </tr>
         <tr>
-            <td>Total Personally Approved Reimbursements:</td><td id="personallyApprovedReimbursements"></td>
+            <td class="JPFont userinfo">Role:</td><td id="rolePrint"></td>
+        </tr>
+        <tr>
+            <td class="JPFont userinfo">Total Personally Approved Reimbursements:</td><td id="personallyApprovedReimbursements"></td>
+        </tr>
+        <tr>
+            <td class="JPFont userinfo">Total Company Reimbursements:</td><td id="globalReimbursements"></td>
+        </tr>
+        <tr>
+            <td><button id="logoutButton"  onclick="logout()">Logout</button></td>
         </tr>
     </table>
 
-    <table id="requestTable">
+
+    <table id="requestTable" class="dataTable">
         <caption>
-            <h1>Requests</h1>
+            <h1 class="JPFont tableTitle">Requests</h1>
         </caption>
-        <tr>
-            <th>Id</th><th>Requester</th><th>Amount</th><th>Reason</th><th>Your Response</th><th></th>
+        <tr class="JPFont columnTitle">
+            <td>Id</td><td>Requester</td><td>Amount</td><td>Reason</td><td>Your Response</td><td></td>
         </tr>
     </table>
 
@@ -81,9 +242,19 @@
     const lname = sessionStorage.getItem("lname");
     const role = sessionStorage.getItem("role");
 
+    const fnamePrint = document.getElementById("fnamePrint");
+    const lnamePrint = document.getElementById("lnamePrint");
+    fnamePrint.innerText = fname;
+    lnamePrint.innerText = lname;
+
+    const usernamePrint = document.getElementById("usernamePrint"); 
+    const rolePrint = document.getElementById("rolePrint");
+    usernamePrint.innerText = username;
+    rolePrint.innerText = role;
+
     let globalReimbursements = 0;
     let personallyApprovedReimbursements = 0;
-    document.getElementById("userImg").setAttribute("src", `assets/${username}.jpg`);
+    document.getElementById("userImg").setAttribute("src", `assets/userpics/${username}.jpg`);
     getRequests();
 
 
@@ -142,7 +313,7 @@
                             <td id="requestedBy${requestObj.requestId}">${requestObj.requestedBy}</td>
                             <td id="value${requestObj.requestId}">${requestObj.value}</td>
                             <td id="requestReason${requestObj.requestId}">${requestObj.requestReason}</td>
-                            <td><textarea type="text" id="reviewReason${requestObj.requestId}"></textarea></td>
+                            <td><textarea type="text" placeholder="Enter request review." style="border-radius: 10px; background: rgb(255, 255, 255, 0.8)" id="reviewReason${requestObj.requestId}"></textarea></td>
                             <td><span id="message${requestObj.requestId}" style="color:red; font-weight:bold">&#8203</span><span class="buttonBr"></span><button class="approveButton" id="approveButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Approved')">Approve</button>
                                 <button class="denyButton" id="denyButton${requestObj.requestId}" onclick="reviewRequest('${requestObj.requestId}', 'Denied')">Deny</button></td>
                             `;
@@ -191,12 +362,14 @@
         let httpResponse = await fetch(`http://localhost:8080/request`, config);
         
         if (httpResponse.status === 200){
-            let globalReimbursements = parseInt(globalReimbursementsTD.innerText);
-            let personallyApprovedReimbursements = parseInt(personallyApprovedReimbursementsTD.innerText);
-            personallyApprovedReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
-            globalReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
-            globalReimbursementsTD.innerText = globalReimbursements;
-            personallyApprovedReimbursementsTD.innerText = personallyApprovedReimbursements;
+            if (newStatus === "Approved"){
+                let globalReimbursements = parseInt(globalReimbursementsTD.innerText);
+                let personallyApprovedReimbursements = parseInt(personallyApprovedReimbursementsTD.innerText);
+                personallyApprovedReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
+                globalReimbursements += parseInt(document.getElementById(`value${requestId}`).innerText);
+                globalReimbursementsTD.innerText = globalReimbursements;
+                personallyApprovedReimbursementsTD.innerText = personallyApprovedReimbursements;
+            }
 
             let requestRow = document.getElementById(`row${requestId}`);
             let reviewReasonBox = document.getElementById(`reviewReason${requestId}`);

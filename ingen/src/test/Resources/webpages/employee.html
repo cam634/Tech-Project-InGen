@@ -5,24 +5,24 @@
     <link rel="icon" href="assets\jurassic-park-icon.jpg">
 <style>
     .greenClass {
-        background-color: white;
+        background-color: transparent;
         animation-name: greening;
         animation-duration: 0.25s;
     }
 
     @keyframes greening {
-        from {background-color: white;}
+        from {background-color: transparent;}
         to {background-color: greenyellow;}
     }
 
     .redClass {
-        background-color: white;
+        background-color: transparent;
         animation-name: reding;
         animation-duration: 0.25s;
     }
 
     @keyframes reding {
-        from {background-color: white;}
+        from {background-color: transparent;}
         to {background-color: red;}
     }
 
@@ -35,7 +35,7 @@
         src: url("assets/customfont/jurassicpark-bl48-webfont.woff") format("woff");
     }
 
-    body {
+    .JPFont {
         font-family: 'CustomFont', Arial, sans-serif;
         font-weight:normal;
         font-style:normal;
@@ -71,13 +71,74 @@
     }
 
     #namePrint {
+        font-size: 80px;
         position: absolute;
-        top: 30%;
-        left: 15%;
+        top: 40%;
+        left: 10%;
         transform: translate(-50%, -50%);
+        color: white;
     }
 
- 
+    .tableTitle {
+        font-size: 60px;
+    }
+
+    .columnTitle {
+        font-size: 40px;
+    }
+
+    .userinfo {
+        font-size: 40px;
+    }
+
+    body {
+        background-image: url("assets/background.jfif");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .dataTable {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+
+    button{
+        display:inline-block;
+        padding:0.3em 1.2em;
+        margin:0 0.3em 0.3em 0;
+        border-radius:2em;
+        box-sizing: border-box;
+        text-decoration:none;
+        font-family:'Roboto',sans-serif;
+        font-weight:300;
+        color:#FFFFFF;
+        background-color:red;
+        text-align:center;
+        transition: all 0.2s;
+        font-family: 'CustomFont', Arial, sans-serif;
+        font-weight:normal;
+        font-style:normal;
+        font-size: 40px;
+        opacity: 0.7;
+    }
+
+    button:hover{
+        background-color:darkred;
+    }
+
+    @media all and (max-width:30em){
+        button{
+            display:block;
+            margin:0.2em auto;
+        }
+    }
 
 
 </style>
@@ -86,38 +147,48 @@
 
     <div class="container">
         <img id="userImg" src="" alt="User image">
+        <table class="JPFont" id="namePrint"><tr><td id="fnamePrint"></td><td></td><td id="lnamePrint"></td></tr></table>
         <div id="namePrint" class="JPFont"></div>
     </div>
     
 
-    <button id="logoutButton" onclick="logout()">Logout</button>
+    
 
-    <table>
+    <table id="userinfo">
         <tr>
-            <td>Total Reimbursements:</td><td id="totalReimbursements"></td>
+            <td class="JPFont userinfo">Username:</td><td id="usernamePrint"></td>
+        </tr>
+        <tr>
+            <td class="JPFont userinfo">Role:</td><td id="rolePrint"></td>
+        </tr>
+        <tr>
+            <td class="JPFont userinfo">Total Reimbursements:</td><td id="totalReimbursements"></td>
+        </tr>
+        <tr>
+            <td><button id="logoutButton" onclick="logout()">Logout</button></td>
         </tr>
     </table>
 
-    <table>
+    <table class="dataTable">
         <caption>
-            <h1>Create Claim Request</h1>
+            <h1 class="JPFont tableTitle">Create Claim Request</h1>
         </caption>
         <tr style="color:red; font-weight:bold">
-            <th id="valueReject">&#8203</th><th id="reasonReject">&#8203</th> <th>&#8203</th>
+            <td id="valueReject">&#8203</td><td id="reasonReject">&#8203</td> <td>&#8203</td>
         </tr>
         <tr>
-            <td><input  placeholder="Amount Requested"  type="number" id="requestValue"></input></td>
-            <td><textarea  type="text" id="requestReason" placeholder="Enter reason for request."></textarea></td>
+            <td><input  style="border-radius: 10px; background: rgb(255, 255, 255, 0.8)" placeholder="Amount Requested"  type="number" id="requestValue"></input></td>
+            <td><textarea  style="border-radius: 10px; background: rgb(255, 255, 255, 0.8)" type="text" id="requestReason" placeholder="Enter reason for request."></textarea></td>
             <td><button id="requestButton" onclick="createRequest()">Create Request</button></td>
         </tr>
     </table>
 
-    <table id="requestTable">
+    <table id="requestTable" class="dataTable">
         <caption>
-            <h1>Requests</h1>
+            <h1 class="JPFont tableTitle">Requests</h1>
         </caption>
-        <tr>
-            <th>Status</th><th>Amount</th><th>Request Reason</th><th>Manager Response</th>
+        <tr class="JPFont columnTitle">
+            <td class="JPFont">Status</td><td>Amount</td><td>Request Reason</td><td>Manager Response</td>
         </tr>
     </table>
 
@@ -130,10 +201,22 @@
     const role = sessionStorage.getItem("role");
     getRequests();
 
-    const namePrint = document.getElementById("namePrint");
-    namePrint.innerText = `${fname} ${lname}`;
+    const fnamePrint = document.getElementById("fnamePrint");
+    const lnamePrint = document.getElementById("lnamePrint");
+    fnamePrint.innerText = fname;
+    lnamePrint.innerText = lname;
 
-    document.getElementById("userImg").setAttribute("src", `assets/${username}.jpg`);
+    const usernamePrint = document.getElementById("usernamePrint"); 
+    const rolePrint = document.getElementById("rolePrint");
+    usernamePrint.innerText = username;
+    rolePrint.innerText = role;
+
+
+
+    
+    //namePrint.innerText = stringfname + "    " + lname;
+
+    document.getElementById("userImg").setAttribute("src", `assets/userpics/${username}.jpg`);
 
     function logout(){
         sessionStorage.setItem("username", "");
@@ -216,10 +299,10 @@
         let httpResponse = await fetch(`http://localhost:8080/requests/${username}`);
         
         requestTable.innerHTML =    `<caption>
-                                        <h1>Requests</h1>
+                                        <h1 class="JPFont tableTitle">Requests</h1>
                                     </caption>
-                                    <tr>
-                                        <th>Status</th><th>Amount</th><th>Request Reason</th><th>Manager Response</th>
+                                    <tr class="JPFont columnTitle">
+                                        <td>Status</td><td>Amount</td><td>Request Reason</td><td>Manager Response</td>
                                     </tr>`
 
         if (httpResponse.status !== 200){
