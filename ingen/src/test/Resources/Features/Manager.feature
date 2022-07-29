@@ -7,9 +7,10 @@ Scenario: As a manager I want to Approve Reimbursement Requests
 
 Scenario: As a manager I want to Approve Reimbursement Requests 
     Given the manager is on the manager homepage 
+    When the manager sees total amount approved
     When the manager enters reason for approval or denial 
     When the manager selects approve reimbursement requests 
-    Then there is an alert that the decision was input 
+    Then the manager sees the updated total 
 
  
 
@@ -24,5 +25,8 @@ Scenario: An Manager should be able to sign out to prevent others from accessing
     Given the manager is on the manager homepage 
     When an manager enters clicks on logout button 
     Then the manager is brought back to the login page 
+
+
+
 
  
